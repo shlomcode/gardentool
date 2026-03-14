@@ -4,764 +4,1568 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GardenTool Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* =========================================
-           VARIABILI CSS E IMPOSTAZIONI BASE
-           ========================================= */
         :root {
-            --primary-dark: #2f7d32;
-            --primary-light: #4caf50;
-            --bg-color: #f5f5f5;
-            --card-bg: #ffffff;
-            --text-dark: #333333;
-            --text-light: #666666;
-            --success: #4caf50;
-            --warning: #ffb300;
-            --danger: #e53935;
-            --border-radius: 12px;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
+            --green-900: #1a3320;
+            --green-800: #1e4028;
+            --green-700: #2a5c35;
+            --green-600: #338042;
+            --green-500: #3da050;
+            --green-400: #5cbc6e;
+            --green-300: #8fd49b;
+            --green-100: #e6f5e9;
+            --green-50:  #f3fbf4;
+
+            --amber: #f59e0b;
+            --amber-light: #fef3c7;
+            --red: #ef4444;
+            --red-light: #fee2e2;
+
+            --surface-0: #ffffff;
+            --surface-1: #f8faf8;
+            --surface-2: #f0f5f1;
+            --surface-3: #e4ede6;
+
+            --text-primary: #111c13;
+            --text-secondary: #4a6652;
+            --text-muted: #8aaa93;
+
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-lg: 0 12px 32px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
+
+            --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+            --header-height: 64px;
+            --sidebar-width: 260px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            line-height: 1.6;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--surface-1);
+            color: var(--text-primary);
+            min-height: 100vh;
+            font-size: 15px;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* =========================================
-           HEADER E LAYOUT
-           ========================================= */
-        header {
-            background-color: var(--primary-dark);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 99px; }
 
-        header h1 {
-            font-size: 1.8rem;
+        /* ══════════════════════════════════════════════════
+           HEADER
+        ══════════════════════════════════════════════════ */
+        .app-header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--header-height);
+            background: var(--green-900);
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            padding: 0 1.5rem;
+            z-index: 200;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.06), var(--shadow-md);
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        /* =========================================
-           BOTTONI E INPUT
-           ========================================= */
-        button {
-            background-color: var(--primary-light);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: var(--transition);
-            display: inline-flex;
+        .app-logo {
+            display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        button:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        button.outline {
-            background-color: transparent;
-            color: var(--primary-dark);
-            border: 2px solid var(--primary-dark);
-        }
-
-        button.outline:hover {
-            background-color: var(--primary-dark);
+            gap: 10px;
             color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
         }
-        
-        button.small {
-            padding: 0.4rem 0.8rem;
+
+        .app-logo-icon {
+            width: 32px; height: 32px;
+            background: var(--green-500);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+        }
+
+        .header-spacer { flex: 1; }
+
+        .header-badge {
+            display: flex; align-items: center; gap: 6px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 99px;
+            padding: 5px 12px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.82rem;
+            font-weight: 500;
+        }
+
+        .header-badge .dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--green-400);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* ══════════════════════════════════════════════════
+           LAYOUT
+        ══════════════════════════════════════════════════ */
+        .app-body {
+            padding-top: var(--header-height);
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* ══════════════════════════════════════════════════
+           ALERT BANNER
+        ══════════════════════════════════════════════════ */
+        .alerts-banner {
+            display: none;
+            background: var(--red-light);
+            border: 1px solid #fca5a5;
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            animation: slideDown 0.3s ease;
+        }
+
+        .alerts-banner.show { display: block; }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .alerts-banner-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: #b91c1c;
+            margin-bottom: 0.5rem;
             font-size: 0.9rem;
         }
 
-        input, select, textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary-light);
-            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-        }
-
-        /* =========================================
-           DASHBOARD & CARDS
-           ========================================= */
-        .dashboard-header {
+        .alerts-banner-list {
+            list-style: none;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .alerts-banner-list li {
+            font-size: 0.85rem;
+            color: #991b1b;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .alerts-banner-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+        }
+
+        /* ══════════════════════════════════════════════════
+           DASHBOARD HEADER
+        ══════════════════════════════════════════════════ */
+        .dash-header {
+            display: flex;
             align-items: center;
-            margin-bottom: 2rem;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
             flex-wrap: wrap;
             gap: 1rem;
         }
 
-        .actions-bar {
+        .dash-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+        }
+
+        .dash-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .dash-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
+        /* ══════════════════════════════════════════════════
+           BUTTONS
+        ══════════════════════════════════════════════════ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 0.6rem 1.1rem;
+            border-radius: var(--radius-sm);
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--green-600);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--green-700);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(51, 128, 66, 0.4);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1.5px solid var(--surface-3);
+        }
+
+        .btn-ghost:hover {
+            background: var(--surface-2);
+            border-color: var(--green-300);
+            color: var(--green-700);
+        }
+
+        .btn-danger {
+            background: var(--red-light);
+            color: var(--red);
+            border: 1.5px solid #fca5a5;
+        }
+
+        .btn-danger:hover {
+            background: var(--red);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.82rem;
+        }
+
+        .btn-icon {
+            padding: 0.5rem;
+            width: 34px;
+            height: 34px;
+        }
+
+        .btn-full { width: 100%; }
+
+        /* ══════════════════════════════════════════════════
+           TOOL CARDS GRID
+        ══════════════════════════════════════════════════ */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+            gap: 1.25rem;
         }
 
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
+        .tool-card {
+            background: var(--surface-0);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--surface-3);
             padding: 1.5rem;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 1.25rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--green-400);
+            opacity: 0;
+            transition: var(--transition);
         }
 
-        .card-header {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 1rem;
-            margin-bottom: 1rem;
+        .tool-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--green-300);
+            transform: translateY(-2px);
         }
 
-        .card-title {
-            font-size: 1.3rem;
-            color: var(--primary-dark);
-            margin-bottom: 0.3rem;
-        }
+        .tool-card:hover::before { opacity: 1; }
 
-        .card-subtitle {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        .card-stats {
-            margin-bottom: 1.5rem;
-        }
-
-        .stat-row {
+        .tool-card-top {
             display: flex;
+            align-items: flex-start;
             justify-content: space-between;
-            margin-bottom: 0.5rem;
+            gap: 1rem;
+        }
+
+        .tool-card-identity {}
+
+        .tool-card-brand {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .tool-card-model {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-family: 'DM Mono', monospace;
+            margin-top: 2px;
+        }
+
+        .tool-card-actions {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .tool-card-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 99px;
+            font-size: 0.78rem;
             font-weight: 500;
         }
 
-        /* =========================================
-           VISTA DETTAGLIO STRUMENTO
-           ========================================= */
-        #tool-detail-view {
-            display: none;
+        .tag-neutral {
+            background: var(--surface-2);
+            color: var(--text-secondary);
         }
 
-        .detail-header {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .hours-display {
-            font-size: 3rem;
-            color: var(--primary-dark);
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-
-        .custom-hours-form {
+        .tool-card-hours {
             display: flex;
-            justify-content: center;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .hours-big {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--green-700);
+            font-family: 'DM Mono', monospace;
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        .hours-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .tool-card-status {
+            display: flex;
             align-items: center;
-            gap: 10px;
-            max-width: 300px;
-            margin: 0 auto;
+            gap: 8px;
+            padding: 0.6rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
-        .custom-hours-form input {
-            margin-bottom: 0;
+        .status-ok {
+            background: var(--green-100);
+            color: var(--green-700);
+        }
+
+        .status-warning {
+            background: var(--amber-light);
+            color: #92400e;
+        }
+
+        .status-danger {
+            background: var(--red-light);
+            color: #991b1b;
+        }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-ok .status-dot { background: var(--green-500); }
+        .status-warning .status-dot { background: var(--amber); animation: pulse-dot 1.5s ease-in-out infinite; }
+        .status-danger .status-dot { background: var(--red); animation: pulse-dot 1s ease-in-out infinite; }
+
+        .empty-state {
+            grid-column: 1 / -1;
             text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
         }
 
-        .grid-2-col {
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 { color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .empty-state p { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+        /* ══════════════════════════════════════════════════
+           DETAIL VIEW
+        ══════════════════════════════════════════════════ */
+        #tool-detail-view { display: none; }
+
+        .detail-hero {
+            background: var(--green-900);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-hero::after {
+            content: '🌿';
+            position: absolute;
+            right: 2rem; top: 50%;
+            transform: translateY(-50%);
+            font-size: 5rem;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .detail-hero-brand {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--green-300);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .detail-hero-model {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-hero-meta {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-hero-hours {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .detail-hours-num {
+            font-family: 'DM Mono', monospace;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.06em;
+            line-height: 1;
+        }
+
+        .detail-hours-unit {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .add-hours-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .hours-input-wrap {
+            position: relative;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .hours-input-wrap input {
+            width: 100%;
+            padding: 0.65rem 2.5rem 0.65rem 1rem;
+            background: rgba(255,255,255,0.1);
+            border: 1.5px solid rgba(255,255,255,0.2);
+            border-radius: var(--radius-sm);
+            color: white;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .hours-input-wrap input::placeholder { color: rgba(255,255,255,0.4); }
+
+        .hours-input-wrap input:focus {
+            outline: none;
+            border-color: var(--green-400);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .hours-input-unit {
+            position: absolute;
+            right: 10px; top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.4);
+            font-size: 0.82rem;
+        }
+
+        .btn-add-hours {
+            background: var(--green-500);
+            color: white;
+            border: none;
+            padding: 0.65rem 1.2rem;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .btn-add-hours:hover {
+            background: var(--green-400);
+            transform: translateY(-1px);
+        }
+
+        /* ── Detail grid ── */
+        .detail-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 1.25rem;
         }
 
-        @media (max-width: 768px) {
-            .grid-2-col {
-                grid-template-columns: 1fr;
-            }
-            .dashboard-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+        @media (max-width: 700px) {
+            .detail-grid { grid-template-columns: 1fr; }
         }
 
         .panel {
-            background: var(--card-bg);
+            background: var(--surface-0);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--surface-3);
             padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-sm);
         }
 
-        .panel h3 {
-            color: var(--primary-dark);
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--bg-color);
-            padding-bottom: 0.5rem;
-        }
-
-        /* =========================================
-           SISTEMA MANUTENZIONE (BARRE E DETTAGLI)
-           ========================================= */
-        .maintenance-item {
-            margin-bottom: 1.5rem;
-            background-color: #fafafa;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid #eee;
-        }
-
-        .maintenance-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
+        .panel-title {
             font-size: 0.95rem;
-            font-weight: bold;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .progress-bar-bg {
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            height: 12px;
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            margin-bottom: 0.5rem;
+        /* ── Maintenance items ── */
+        .maint-item {
+            padding: 1rem;
+            background: var(--surface-1);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--surface-3);
+            margin-bottom: 0.75rem;
         }
 
-        .progress-bar-fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 0.5s ease, background-color 0.5s ease;
-        }
+        .maint-item:last-child { margin-bottom: 0; }
 
-        .maintenance-status-bar {
+        .maint-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        .alert-msg {
-            font-size: 0.85rem;
-            font-weight: bold;
+        .maint-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-primary);
         }
 
-        /* Dettagli espandibili */
-        details {
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px dashed #ccc;
+        .maint-count {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .prog-bg {
+            height: 6px;
+            background: var(--surface-3);
+            border-radius: 99px;
+            overflow: hidden;
+            margin-bottom: 0.6rem;
+        }
+
+        .prog-fill {
+            height: 100%;
+            border-radius: 99px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s;
+        }
+
+        .maint-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .maint-status-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .maint-details {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed var(--surface-3);
         }
 
         summary {
-            font-size: 0.85rem;
-            color: var(--primary-dark);
+            font-size: 0.8rem;
+            color: var(--green-600);
             cursor: pointer;
             font-weight: 600;
-            outline: none;
             user-select: none;
         }
 
-        .maintenance-info {
-            font-size: 0.9rem;
-            color: var(--text-light);
+        .maint-info-text {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.55;
             margin-top: 0.5rem;
+        }
+
+        /* ── Mix calculator ── */
+        .calc-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .calc-input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 1.5px solid var(--surface-3);
+            border-radius: var(--radius-sm);
+            font-family: 'DM Mono', monospace;
+            font-size: 1rem;
+            color: var(--text-primary);
+            background: var(--surface-1);
+            transition: var(--transition);
+            margin-bottom: 1rem;
+        }
+
+        .calc-input:focus {
+            outline: none;
+            border-color: var(--green-400);
+            background: var(--surface-0);
+        }
+
+        .calc-result-card {
+            background: var(--green-100);
+            border: 1px solid var(--green-300);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .calc-result-label {
+            font-size: 0.82rem;
+            color: var(--green-700);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .calc-result-value {
+            font-family: 'DM Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--green-800);
+            line-height: 1;
+        }
+
+        .calc-result-unit {
+            font-size: 0.9rem;
+            color: var(--green-600);
+            font-weight: 500;
+        }
+
+        .calc-hint {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
             line-height: 1.4;
         }
 
-        /* =========================================
-           CALCOLATORE MISCELA E MODALI
-           ========================================= */
-        .mix-result {
-            background-color: var(--bg-color);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .mix-result span {
-            color: var(--primary-dark);
-            font-size: 1.5rem;
-        }
-
+        /* ══════════════════════════════════════════════════
+           MODAL
+        ══════════════════════════════════════════════════ */
         .modal-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000; opacity: 0; visibility: hidden;
-            transition: var(--transition); backdrop-filter: blur(3px);
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 500;
+            padding: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
         }
 
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-
-        .modal-content {
-            background: var(--card-bg); padding: 2rem;
-            border-radius: var(--border-radius); width: 90%; max-width: 500px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            transform: translateY(-20px); transition: var(--transition);
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-box {
+            background: var(--surface-0);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            width: 100%;
+            max-width: 460px;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.96) translateY(8px);
+            transition: var(--transition);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.open .modal-box {
+            transform: scale(1) translateY(0);
+        }
 
         .modal-header {
-            display: flex; justify-content: space-between;
-            align-items: center; margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.75rem;
         }
 
-        .close-btn {
-            background: none; border: none; font-size: 1.5rem;
-            color: var(--text-light); cursor: pointer; padding: 0;
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
-        .close-btn:hover { color: var(--danger); background: none; transform: none; box-shadow: none; }
+
+        .modal-close {
+            width: 32px; height: 32px;
+            border-radius: 99px;
+            border: none;
+            background: var(--surface-2);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover { background: var(--red-light); color: var(--red); }
+
+        /* Form fields */
+        .form-field { margin-bottom: 1.1rem; }
+
+        .form-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 1.5px solid var(--surface-3);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            background: var(--surface-1);
+            transition: var(--transition);
+            appearance: none;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--green-400);
+            background: var(--surface-0);
+            box-shadow: 0 0 0 3px rgba(93, 188, 110, 0.15);
+        }
+
+        /* ══════════════════════════════════════════════════
+           CONFIRM MODAL (delete)
+        ══════════════════════════════════════════════════ */
+        .confirm-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .confirm-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .confirm-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .confirm-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .confirm-actions .btn { flex: 1; }
+
+        /* ══════════════════════════════════════════════════
+           TOAST
+        ══════════════════════════════════════════════════ */
+        #toast-container {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .toast {
+            background: var(--green-900);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius-md);
+            font-size: 0.88rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 220px;
+            animation: toastIn 0.3s ease forwards;
+        }
+
+        .toast.out { animation: toastOut 0.3s ease forwards; }
+
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes toastOut {
+            to { opacity: 0; transform: translateX(20px); }
+        }
+
+        /* ══════════════════════════════════════════════════
+           RESPONSIVE
+        ══════════════════════════════════════════════════ */
+        @media (max-width: 600px) {
+            .page { padding: 1.25rem 1rem; }
+            .dash-header { flex-direction: column; align-items: flex-start; }
+            .detail-hours-num { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>🌿 Gestione Decespugliatori</h1>
-    </header>
+<header class="app-header">
+    <div class="app-logo">
+        <div class="app-logo-icon">🌿</div>
+        GardenTool Pro
+    </div>
+    <div class="header-spacer"></div>
+    <div class="header-badge" id="header-badge">
+        <span class="dot"></span>
+        <span id="header-badge-text">0 strumenti</span>
+    </div>
+</header>
 
-    <div class="container">
-        
-        <main id="dashboard-view">
-            <div class="dashboard-header">
-                <h2>I tuoi strumenti</h2>
-                <div class="actions-bar">
-                    <button class="outline small" onclick="exportData()">💾 Salva Backup</button>
-                    <button class="outline small" onclick="document.getElementById('file-input').click()">📂 Carica Dati</button>
-                    <input type="file" id="file-input" style="display: none;" accept=".json" onchange="importData(event)">
-                    
-                    <button onclick="openModal()">➕ Nuovo</button>
-                </div>
+<div class="app-body">
+
+    <!-- ═══════════ DASHBOARD ═══════════ -->
+    <div class="page" id="dashboard-view">
+
+        <div id="alerts-banner" class="alerts-banner">
+            <div class="alerts-banner-header">⚠️ Manutenzione richiesta</div>
+            <ul class="alerts-banner-list" id="alerts-list"></ul>
+        </div>
+
+        <div class="dash-header">
+            <div>
+                <h1 class="dash-title">I tuoi strumenti</h1>
+                <p class="dash-subtitle" id="dash-count-text">Gestisci e monitora tutta la tua attrezzatura</p>
             </div>
-            
-            <div id="tools-container" class="tools-grid">
-                </div>
-        </main>
-
-        <main id="tool-detail-view">
-            <button class="outline" onclick="closeToolDetail()" style="margin-bottom: 1rem;">
-                ⬅ Torna alla Dashboard
-            </button>
-
-            <div class="detail-header">
-                <h2 id="detail-title">Marca Modello</h2>
-                <p class="card-subtitle" id="detail-subtitle">Tipo | Miscela: %</p>
-                
-                <div class="hours-display">
-                    <span id="detail-hours">0</span> <span style="font-size: 1rem; color: var(--text-light);">ore totali</span>
-                </div>
-                
-                <div class="custom-hours-form">
-                    <input type="number" id="custom-hours-input" min="0.1" step="0.1" placeholder="Ore (es. 1.5)">
-                    <button onclick="addCustomHours()">Aggiungi</button>
-                </div>
+            <div class="dash-actions">
+                <button class="btn btn-ghost btn-sm" onclick="exportData()">💾 Backup</button>
+                <button class="btn btn-ghost btn-sm" onclick="document.getElementById('file-input').click()">📂 Ripristina</button>
+                <input type="file" id="file-input" style="display:none;" accept=".json" onchange="importData(event)">
+                <button class="btn btn-primary" onclick="openAddModal()">+ Nuovo</button>
             </div>
+        </div>
 
-            <div class="grid-2-col">
-                <div class="panel">
-                    <h3>🛠 Stato Manutenzione</h3>
-                    <div id="maintenance-container">
-                        </div>
-                </div>
-
-                <div class="panel">
-                    <h3>⛽ Calcolatore Miscela</h3>
-                    <p style="margin-bottom: 1rem; color: var(--text-light); font-size: 0.9rem;">
-                        Inserisci i litri di benzina, calcoleremo l'olio necessario in base alla percentuale salvata (<span id="calc-mix-perc"></span>%).
-                    </p>
-                    
-                    <label>Litri di benzina:</label>
-                    <input type="number" id="petrol-liters" placeholder="Es. 5" step="0.5" min="0.5" oninput="calculateMix()">
-                    
-                    <div class="mix-result">
-                        Olio da aggiungere:<br>
-                        <span id="oil-result">0</span> ml
-                    </div>
-                </div>
-            </div>
-        </main>
-
+        <div class="tools-grid" id="tools-container"></div>
     </div>
 
-    <div id="add-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Nuovo Strumento</h2>
-                <button class="close-btn" onclick="closeModal()">×</button>
+    <!-- ═══════════ DETAIL ═══════════ -->
+    <div class="page" id="tool-detail-view">
+
+        <div style="margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+            <button class="btn btn-ghost btn-sm" onclick="closeDetail()">← Dashboard</button>
+            <div style="display:flex; gap: 8px;">
+                <button class="btn btn-ghost btn-sm" onclick="openEditModal()">✏️ Modifica</button>
+                <button class="btn btn-danger btn-sm" onclick="openDeleteConfirm()">🗑 Elimina</button>
             </div>
-            <form id="add-tool-form" onsubmit="addTool(event)">
-                <label>Marca:</label>
-                <input type="text" id="tool-brand" required placeholder="Es. Stihl, Husqvarna...">
-                
-                <label>Modello:</label>
-                <input type="text" id="tool-model" required placeholder="Es. FS 450">
-                
-                <label>Tipo Motore:</label>
-                <select id="tool-type">
-                    <option value="2 tempi">2 tempi</option>
-                    <option value="4 tempi">4 tempi</option>
-                </select>
-                
-                <label>Percentuale Miscela Consigliata (%):</label>
-                <input type="number" id="tool-mix" required step="0.1" min="0" placeholder="Es. 2">
-                
-                <button type="submit" style="width: 100%; margin-top: 1rem;">💾 Salva Strumento</button>
-            </form>
+        </div>
+
+        <div class="detail-hero">
+            <div class="detail-hero-brand" id="detail-brand">—</div>
+            <div class="detail-hero-model" id="detail-model">—</div>
+            <div class="detail-hero-meta" id="detail-meta">—</div>
+            <div class="detail-hero-hours">
+                <span class="detail-hours-num" id="detail-hours">0</span>
+                <span class="detail-hours-unit">ore totali</span>
+            </div>
+            <div class="add-hours-row">
+                <div class="hours-input-wrap">
+                    <input type="number" id="custom-hours-input" min="0.1" step="0.1" placeholder="Es. 1.5">
+                    <span class="hours-input-unit">h</span>
+                </div>
+                <button class="btn-add-hours" onclick="addHours()">+ Aggiungi ore</button>
+            </div>
+        </div>
+
+        <div class="detail-grid">
+            <div class="panel">
+                <div class="panel-title">🛠 Stato Manutenzione</div>
+                <div id="maint-container"></div>
+            </div>
+            <div class="panel">
+                <div class="panel-title">⛽ Calcolatore Miscela</div>
+                <p class="calc-hint">Inserisci i litri di benzina per calcolare l'olio necessario alla percentuale di miscela configurata (<span id="calc-mix-perc">—</span>%).</p>
+                <label class="calc-label">Litri di benzina</label>
+                <input type="number" class="calc-input" id="petrol-liters" placeholder="Es. 5" step="0.5" min="0.5" oninput="calcMix()">
+                <div class="calc-result-card">
+                    <div class="calc-result-label">Olio da aggiungere</div>
+                    <div class="calc-result-value" id="oil-result">—</div>
+                    <div class="calc-result-unit">ml</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script>
-        // =========================================
-        // STATO E REGOLE
-        // =========================================
-        
-        let tools = [];
-        let currentToolId = null;
+</div>
 
-        // Regole dettagliate di manutenzione
-        const maintenanceRules = {
-            filter: { 
-                name: "Pulizia filtro aria", 
-                interval: 10,
-                info: "Rimuovi il coperchio del filtro. Se è in spugna, lavalo con acqua calda e sapone, strizzalo e lascialo asciugare. Se è in carta, soffialo delicatamente con aria compressa dall'interno verso l'esterno. Un filtro intasato aumenta i consumi e usura il motore."
-            },
-            spark: { 
-                name: "Controllo candela", 
-                interval: 25,
-                info: "Smonta la candela usando l'apposita chiave. Pulisci gli elettrodi con una spazzola metallica per rimuovere i depositi carboniosi. Controlla che la distanza tra gli elettrodi sia corretta (circa 0.5 mm). Se gli elettrodi sono consumati, sostituisci la candela."
-            },
-            gear: { 
-                name: "Ingrassaggio coppia conica", 
-                interval: 30,
-                info: "Pulisci la zona attorno al tappo della testina ingranaggi prima di svitarlo. Inserisci grasso specifico per coppie coniche (al litio/molibdeno) girando leggermente il disco per far distribuire il grasso sui denti. Non riempire fino all'orlo per evitare sovrappressioni."
-            },
-            carb: { 
-                name: "Pulizia carburatore e pescante", 
-                interval: 50,
-                info: "Controlla il filtro pescante all'interno del serbatoio della miscela (sostituiscilo se duro o sporco). Per il carburatore, è consigliata una pulizia delle membrane o l'uso di uno spray pulitore specifico se noti cali di potenza o spegnimenti al minimo."
-            }
-        };
+<!-- ══ MODAL: AGGIUNGI ══ -->
+<div class="modal-overlay" id="add-modal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <span class="modal-title">Nuovo strumento</span>
+            <button class="modal-close" onclick="closeAddModal()">×</button>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Marca</label>
+            <input class="form-input" type="text" id="f-brand" placeholder="Es. Stihl, Husqvarna…" required>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Modello</label>
+            <input class="form-input" type="text" id="f-model" placeholder="Es. FS 450" required>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Tipo motore</label>
+            <select class="form-select" id="f-type">
+                <option value="2 tempi">2 tempi</option>
+                <option value="4 tempi">4 tempi</option>
+            </select>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Percentuale miscela (%)</label>
+            <input class="form-input" type="number" id="f-mix" step="0.1" min="0" placeholder="Es. 2">
+        </div>
+        <button class="btn btn-primary btn-full" style="margin-top: 0.5rem;" onclick="saveTool()">Salva strumento</button>
+    </div>
+</div>
 
-        // Caricamento iniziale
-        window.onload = () => {
-            const savedTools = localStorage.getItem('brushcutters_data');
-            if (savedTools) tools = JSON.parse(savedTools);
-            renderTools();
-        };
+<!-- ══ MODAL: MODIFICA ══ -->
+<div class="modal-overlay" id="edit-modal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <span class="modal-title">Modifica strumento</span>
+            <button class="modal-close" onclick="closeEditModal()">×</button>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Marca</label>
+            <input class="form-input" type="text" id="ef-brand" required>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Modello</label>
+            <input class="form-input" type="text" id="ef-model" required>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Tipo motore</label>
+            <select class="form-select" id="ef-type">
+                <option value="2 tempi">2 tempi</option>
+                <option value="4 tempi">4 tempi</option>
+            </select>
+        </div>
+        <div class="form-field">
+            <label class="form-label">Percentuale miscela (%)</label>
+            <input class="form-input" type="number" id="ef-mix" step="0.1" min="0">
+        </div>
+        <button class="btn btn-primary btn-full" style="margin-top: 0.5rem;" onclick="updateTool()">Aggiorna strumento</button>
+    </div>
+</div>
 
-        function saveData() {
-            localStorage.setItem('brushcutters_data', JSON.stringify(tools));
+<!-- ══ MODAL: CONFERMA ELIMINA ══ -->
+<div class="modal-overlay" id="delete-modal">
+    <div class="modal-box" style="max-width: 360px; text-align: center;">
+        <div class="confirm-icon">🗑</div>
+        <div class="confirm-title">Elimina strumento?</div>
+        <p class="confirm-text">Verranno eliminati anche le ore e lo storico manutenzioni. Questa azione è irreversibile.</p>
+        <div class="confirm-actions">
+            <button class="btn btn-ghost" onclick="closeDeleteConfirm()">Annulla</button>
+            <button class="btn btn-danger" onclick="confirmDelete()">Elimina</button>
+        </div>
+    </div>
+</div>
+
+<!-- ══ MODAL: CONFERMA IMPORT ══ -->
+<div class="modal-overlay" id="import-modal">
+    <div class="modal-box" style="max-width: 360px; text-align: center;">
+        <div class="confirm-icon">📂</div>
+        <div class="confirm-title">Ripristina backup?</div>
+        <p class="confirm-text">I dati attuali verranno sostituiti con quelli del file. Assicurati di aver fatto un backup prima di procedere.</p>
+        <div class="confirm-actions">
+            <button class="btn btn-ghost" onclick="cancelImport()">Annulla</button>
+            <button class="btn btn-primary" onclick="confirmImport()">Ripristina</button>
+        </div>
+    </div>
+</div>
+
+<!-- ══ TOAST ══ -->
+<div id="toast-container"></div>
+
+<script>
+    // ─────────────────────────────────────────────
+    // STATE
+    // ─────────────────────────────────────────────
+    let tools = [];
+    let currentToolId = null;
+    let pendingImportData = null;
+
+    const maintenanceRules = {
+        filter: {
+            name: "Pulizia filtro aria",
+            interval: 10,
+            info: "Rimuovi il coperchio del filtro. Se è in spugna, lavalo con acqua calda e sapone, strizzalo e lascialo asciugare. Se è in carta, soffialo delicatamente con aria compressa dall'interno verso l'esterno. Un filtro intasato aumenta i consumi e usura il motore."
+        },
+        spark: {
+            name: "Controllo candela",
+            interval: 25,
+            info: "Smonta la candela usando l'apposita chiave. Pulisci gli elettrodi con una spazzola metallica per rimuovere i depositi carboniosi. Controlla che la distanza tra gli elettrodi sia corretta (circa 0.5 mm). Se gli elettrodi sono consumati, sostituisci la candela."
+        },
+        gear: {
+            name: "Ingrassaggio coppia conica",
+            interval: 30,
+            info: "Pulisci la zona attorno al tappo della testina ingranaggi prima di svitarlo. Inserisci grasso specifico per coppie coniche (al litio/molibdeno) girando leggermente il disco per far distribuire il grasso sui denti. Non riempire fino all'orlo per evitare sovrappressioni."
+        },
+        carb: {
+            name: "Pulizia carburatore e pescante",
+            interval: 50,
+            info: "Controlla il filtro pescante all'interno del serbatoio della miscela (sostituiscilo se duro o sporco). Per il carburatore, è consigliata una pulizia delle membrane o l'uso di uno spray pulitore specifico se noti cali di potenza o spegnimenti al minimo."
         }
+    };
 
-        // =========================================
-        // BACKUP E RIPRISTINO DATI (EXPORT / IMPORT)
-        // =========================================
+    // ─────────────────────────────────────────────
+    // INIT & PERSIST
+    // ─────────────────────────────────────────────
+    window.onload = () => {
+        const saved = localStorage.getItem('gardentool_data');
+        if (saved) tools = JSON.parse(saved);
+        renderDashboard();
+    };
 
-        function exportData() {
-            if (tools.length === 0) {
-                alert("Nessun dato da salvare!");
-                return;
-            }
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tools));
-            const downloadAnchorNode = document.createElement('a');
-            downloadAnchorNode.setAttribute("href", dataStr);
-            downloadAnchorNode.setAttribute("download", "backup_decespugliatori.json");
-            document.body.appendChild(downloadAnchorNode);
-            downloadAnchorNode.click();
-            downloadAnchorNode.remove();
-        }
+    function save() {
+        localStorage.setItem('gardentool_data', JSON.stringify(tools));
+    }
 
-        function importData(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const importedTools = JSON.parse(e.target.result);
-                    if (Array.isArray(importedTools)) {
-                        tools = importedTools;
-                        saveData();
-                        renderTools();
-                        alert("Dati ripristinati con successo!");
-                    } else {
-                        alert("Il file non contiene dati validi per questa app.");
-                    }
-                } catch (err) {
-                    alert("Errore nella lettura del file. Assicurati che sia il file .json corretto.");
-                }
-            };
-            reader.readAsText(file);
-            // Reset input per permettere di ricaricare lo stesso file
-            event.target.value = ''; 
-        }
+    function fmtHours(h) {
+        return Number.isInteger(h) ? h : h.toFixed(1);
+    }
 
-        // =========================================
-        // GESTIONE UI
-        // =========================================
+    // ─────────────────────────────────────────────
+    // TOAST
+    // ─────────────────────────────────────────────
+    function toast(msg, emoji = '✅') {
+        const el = document.createElement('div');
+        el.className = 'toast';
+        el.innerHTML = `<span>${emoji}</span> ${msg}`;
+        document.getElementById('toast-container').appendChild(el);
+        setTimeout(() => {
+            el.classList.add('out');
+            setTimeout(() => el.remove(), 300);
+        }, 2800);
+    }
 
-        function openModal() { document.getElementById('add-modal').classList.add('active'); }
-        function closeModal() { 
-            document.getElementById('add-modal').classList.remove('active'); 
-            document.getElementById('add-tool-form').reset(); 
-        }
+    // ─────────────────────────────────────────────
+    // DASHBOARD RENDER
+    // ─────────────────────────────────────────────
+    function renderDashboard() {
+        const container = document.getElementById('tools-container');
+        container.innerHTML = '';
 
-        function openToolDetail(id) {
-            currentToolId = id;
-            const tool = tools.find(t => t.id === id);
-            if(!tool) return;
+        // Header badge
+        document.getElementById('header-badge-text').textContent =
+            tools.length === 0 ? '0 strumenti' :
+            tools.length === 1 ? '1 strumento' : `${tools.length} strumenti`;
 
-            document.getElementById('dashboard-view').style.display = 'none';
-            document.getElementById('tool-detail-view').style.display = 'block';
-
-            document.getElementById('detail-title').textContent = `${tool.brand} ${tool.model}`;
-            document.getElementById('detail-subtitle').textContent = `Motore: ${tool.type} | Miscela: ${tool.mix}%`;
-            
-            // Format hours per evitare troppi decimali
-            document.getElementById('detail-hours').textContent = Number.isInteger(tool.hours) ? tool.hours : tool.hours.toFixed(1);
-            document.getElementById('calc-mix-perc').textContent = tool.mix;
-            
-            document.getElementById('custom-hours-input').value = '';
-            document.getElementById('petrol-liters').value = '';
-            document.getElementById('oil-result').textContent = '0';
-
-            checkMaintenance(tool);
-        }
-
-        function closeToolDetail() {
-            currentToolId = null;
-            document.getElementById('tool-detail-view').style.display = 'none';
-            document.getElementById('dashboard-view').style.display = 'block';
-            renderTools();
-        }
-
-        // =========================================
-        // LOGICA STRUMENTI E ORE
-        // =========================================
-
-        function addTool(event) {
-            event.preventDefault();
-            const newTool = {
-                id: Date.now(),
-                brand: document.getElementById('tool-brand').value,
-                model: document.getElementById('tool-model').value,
-                type: document.getElementById('tool-type').value,
-                mix: parseFloat(document.getElementById('tool-mix').value),
-                hours: 0,
-                maintenanceHistory: { filter: 0, spark: 0, gear: 0, carb: 0 }
-            };
-            tools.push(newTool);
-            saveData();
-            renderTools();
-            closeModal();
-        }
-
-        function renderTools() {
-            const container = document.getElementById('tools-container');
-            container.innerHTML = '';
-
-            if (tools.length === 0) {
-                container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-light); padding: 2rem;">Nessun decespugliatore registrato. Aggiungine uno!</p>`;
-                return;
-            }
-
-            tools.forEach(tool => {
-                let generalStatus = "🟢 Ok";
-                let statusColor = "var(--success)";
-                
-                for (const key in maintenanceRules) {
-                    const rule = maintenanceRules[key];
-                    const hoursSinceLast = tool.hours - tool.maintenanceHistory[key];
-                    const percentage = (hoursSinceLast / rule.interval) * 100;
-                    
-                    if (percentage >= 100) { generalStatus = "🔴 Manutenzione richiesta"; statusColor = "var(--danger)"; break; } 
-                    else if (percentage >= 80) { generalStatus = "🟡 Presto da fare"; statusColor = "var(--warning)"; }
-                }
-
-                // Format hours for display
-                const displayHours = Number.isInteger(tool.hours) ? tool.hours : tool.hours.toFixed(1);
-
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div>
-                        <div class="card-header">
-                            <h3 class="card-title">${tool.brand}</h3>
-                            <p class="card-subtitle">${tool.model}</p>
-                        </div>
-                        <div class="card-stats">
-                            <div class="stat-row"><span>Ore Utilizzo:</span><span>${displayHours} h</span></div>
-                            <div class="stat-row"><span>Stato:</span><span style="color: ${statusColor}; font-weight: bold;">${generalStatus}</span></div>
-                        </div>
-                    </div>
-                    <button class="outline" onclick="openToolDetail(${tool.id})">Apri Dashboard ➔</button>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function addCustomHours() {
-            const input = document.getElementById('custom-hours-input');
-            const amount = parseFloat(input.value);
-            
-            if (isNaN(amount) || amount <= 0) {
-                alert("Inserisci un numero valido di ore (es. 1.5).");
-                return;
-            }
-
-            const tool = tools.find(t => t.id === currentToolId);
-            if (!tool) return;
-
-            tool.hours += amount;
-            // Arrotonda per evitare problemi di virgola mobile in JS (es 1.1 + 0.2 = 1.300000001)
-            tool.hours = Math.round(tool.hours * 10) / 10; 
-            
-            saveData();
-            
-            document.getElementById('detail-hours').textContent = Number.isInteger(tool.hours) ? tool.hours : tool.hours.toFixed(1);
-            checkMaintenance(tool);
-            input.value = ''; // svuota campo
-        }
-
-        // =========================================
-        // MANUTENZIONE & CALCOLATORE
-        // =========================================
-
-        function checkMaintenance(tool) {
-            const container = document.getElementById('maintenance-container');
-            container.innerHTML = '';
-
+        // Alerts
+        const alerts = [];
+        tools.forEach(tool => {
             for (const key in maintenanceRules) {
                 const rule = maintenanceRules[key];
-                const hoursSinceLast = tool.hours - tool.maintenanceHistory[key];
-                let percentage = (hoursSinceLast / rule.interval) * 100;
-                if (percentage > 100) percentage = 100;
-
-                let color = "var(--success)";
-                let msg = "Regolare";
-                let btnHtml = "";
-
-                if (percentage >= 100) {
-                    color = "var(--danger)"; msg = "Da fare subito!";
-                    btnHtml = `<button class="small" style="background-color: var(--danger);" onclick="markMaintenanceDone('${key}')">✅ Fatto</button>`;
-                } else if (percentage >= 80) {
-                    color = "var(--warning)"; msg = "Consigliata a breve";
-                    btnHtml = `<button class="small outline" onclick="markMaintenanceDone('${key}')">✅ Fatto</button>`;
-                } else {
-                    btnHtml = `<button class="small outline" style="opacity: 0.5;" onclick="markMaintenanceDone('${key}')">🔄 Azzera</button>`;
+                const pct = ((tool.hours - tool.maintenanceHistory[key]) / rule.interval) * 100;
+                if (pct >= 100) {
+                    alerts.push(`${tool.brand} ${tool.model}: ${rule.name}`);
+                    break;
                 }
-
-                // Format numbers to avoid excessive decimals
-                const displayCurrent = Number.isInteger(hoursSinceLast) ? hoursSinceLast : hoursSinceLast.toFixed(1);
-
-                const item = document.createElement('div');
-                item.className = 'maintenance-item';
-                item.innerHTML = `
-                    <div class="maintenance-header">
-                        <span>${rule.name}</span>
-                        <span>${displayCurrent} / ${rule.interval}h</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" style="width: ${percentage}%; background-color: ${color};"></div>
-                    </div>
-                    <div class="maintenance-status-bar">
-                        <span class="alert-msg" style="color: ${color};">${msg}</span>
-                        ${btnHtml}
-                    </div>
-                    <details>
-                        <summary>Maggiori info e istruzioni...</summary>
-                        <div class="maintenance-info">${rule.info}</div>
-                    </details>
-                `;
-                container.appendChild(item);
             }
+        });
+
+        const banner = document.getElementById('alerts-banner');
+        const list = document.getElementById('alerts-list');
+        if (alerts.length > 0) {
+            banner.classList.add('show');
+            list.innerHTML = alerts.map(a => `<li>${a}</li>`).join('');
+        } else {
+            banner.classList.remove('show');
         }
 
-        function markMaintenanceDone(taskKey) {
-            const tool = tools.find(t => t.id === currentToolId);
-            if (!tool) return;
-
-            tool.maintenanceHistory[taskKey] = tool.hours;
-            saveData();
-            checkMaintenance(tool);
+        if (tools.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">🌿</div>
+                    <h3>Nessun strumento registrato</h3>
+                    <p>Aggiungi il tuo primo strumento per iniziare a tenere traccia delle ore e delle manutenzioni.</p>
+                    <button class="btn btn-primary" onclick="openAddModal()">+ Aggiungi strumento</button>
+                </div>`;
+            return;
         }
 
-        function calculateMix() {
-            const tool = tools.find(t => t.id === currentToolId);
-            if (!tool) return;
+        tools.forEach(tool => {
+            let worstPct = 0;
+            for (const key in maintenanceRules) {
+                const rule = maintenanceRules[key];
+                const pct = ((tool.hours - tool.maintenanceHistory[key]) / rule.interval) * 100;
+                if (pct > worstPct) worstPct = pct;
+            }
 
-            const litersInput = document.getElementById('petrol-liters').value;
-            const resultElement = document.getElementById('oil-result');
-
-            if (litersInput && litersInput > 0) {
-                const oilMl = parseFloat(litersInput) * tool.mix * 10;
-                resultElement.textContent = Math.round(oilMl);
+            let statusClass, statusText;
+            if (worstPct >= 100) {
+                statusClass = 'status-danger'; statusText = 'Manutenzione richiesta';
+            } else if (worstPct >= 80) {
+                statusClass = 'status-warning'; statusText = 'Intervento consigliato';
             } else {
-                resultElement.textContent = '0';
+                statusClass = 'status-ok'; statusText = 'Tutto regolare';
             }
+
+            const card = document.createElement('div');
+            card.className = 'tool-card';
+            card.innerHTML = `
+                <div class="tool-card-top">
+                    <div class="tool-card-identity">
+                        <div class="tool-card-brand">${tool.brand}</div>
+                        <div class="tool-card-model">${tool.model}</div>
+                    </div>
+                    <div class="tool-card-actions">
+                        <button class="btn btn-ghost btn-sm btn-icon" title="Modifica" onclick="event.stopPropagation(); quickEdit(${tool.id})">✏️</button>
+                        <button class="btn btn-danger btn-sm btn-icon" title="Elimina" onclick="event.stopPropagation(); quickDelete(${tool.id})">🗑</button>
+                    </div>
+                </div>
+                <div class="tool-card-meta">
+                    <span class="tag tag-neutral">${tool.type}</span>
+                    <span class="tag tag-neutral">Miscela ${tool.mix}%</span>
+                </div>
+                <div class="tool-card-hours">
+                    <span class="hours-big">${fmtHours(tool.hours)}</span>
+                    <span class="hours-label">ore di utilizzo</span>
+                </div>
+                <div class="tool-card-status ${statusClass}">
+                    <span class="status-dot"></span>
+                    ${statusText}
+                </div>
+                <button class="btn btn-ghost" style="width:100%;" onclick="openDetail(${tool.id})">Apri Dashboard →</button>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // ─────────────────────────────────────────────
+    // QUICK ACTIONS FROM CARD
+    // ─────────────────────────────────────────────
+    function quickEdit(id) {
+        currentToolId = id;
+        openEditModal();
+    }
+
+    function quickDelete(id) {
+        currentToolId = id;
+        openDeleteConfirm();
+    }
+
+    // ─────────────────────────────────────────────
+    // DETAIL VIEW
+    // ─────────────────────────────────────────────
+    function openDetail(id) {
+        currentToolId = id;
+        const tool = tools.find(t => t.id === id);
+        if (!tool) return;
+
+        document.getElementById('dashboard-view').style.display = 'none';
+        document.getElementById('tool-detail-view').style.display = 'block';
+        window.scrollTo(0, 0);
+
+        refreshDetailHeader(tool);
+        renderMaintenance(tool);
+
+        document.getElementById('custom-hours-input').value = '';
+        document.getElementById('petrol-liters').value = '';
+        document.getElementById('oil-result').textContent = '—';
+    }
+
+    function refreshDetailHeader(tool) {
+        document.getElementById('detail-brand').textContent = tool.brand;
+        document.getElementById('detail-model').textContent = tool.model;
+        document.getElementById('detail-meta').textContent = `Motore ${tool.type} · Miscela ${tool.mix}%`;
+        document.getElementById('detail-hours').textContent = fmtHours(tool.hours);
+        document.getElementById('calc-mix-perc').textContent = tool.mix;
+    }
+
+    function closeDetail() {
+        currentToolId = null;
+        document.getElementById('tool-detail-view').style.display = 'none';
+        document.getElementById('dashboard-view').style.display = 'block';
+        renderDashboard();
+    }
+
+    function addHours() {
+        const input = document.getElementById('custom-hours-input');
+        const val = parseFloat(input.value);
+        if (isNaN(val) || val <= 0) { toast('Inserisci un numero valido di ore.', '⚠️'); return; }
+        const tool = tools.find(t => t.id === currentToolId);
+        if (!tool) return;
+        tool.hours = Math.round((tool.hours + val) * 10) / 10;
+        save();
+        document.getElementById('detail-hours').textContent = fmtHours(tool.hours);
+        renderMaintenance(tool);
+        input.value = '';
+        toast(`+${fmtHours(val)} ore aggiunte`);
+    }
+
+    // ─────────────────────────────────────────────
+    // MAINTENANCE
+    // ─────────────────────────────────────────────
+    function renderMaintenance(tool) {
+        const container = document.getElementById('maint-container');
+        container.innerHTML = '';
+
+        for (const key in maintenanceRules) {
+            const rule = maintenanceRules[key];
+            const since = tool.hours - tool.maintenanceHistory[key];
+            let pct = Math.min((since / rule.interval) * 100, 100);
+
+            let color, statusText, btnHtml;
+            if (pct >= 100) {
+                color = 'var(--red)';
+                statusText = `<span class="maint-status-text" style="color:var(--red)">Da fare subito!</span>`;
+                btnHtml = `<button class="btn btn-danger btn-sm" onclick="maintDone('${key}')">✅ Fatto</button>`;
+            } else if (pct >= 80) {
+                color = 'var(--amber)';
+                statusText = `<span class="maint-status-text" style="color:#92400e">Consigliata a breve</span>`;
+                btnHtml = `<button class="btn btn-ghost btn-sm" onclick="maintDone('${key}')">✅ Fatto</button>`;
+            } else {
+                color = 'var(--green-500)';
+                statusText = `<span class="maint-status-text" style="color:var(--green-600)">Regolare</span>`;
+                btnHtml = `<button class="btn btn-ghost btn-sm" style="opacity:0.6" onclick="maintDone('${key}')">↺ Azzera</button>`;
+            }
+
+            const item = document.createElement('div');
+            item.className = 'maint-item';
+            item.innerHTML = `
+                <div class="maint-top">
+                    <span class="maint-name">${rule.name}</span>
+                    <span class="maint-count">${fmtHours(since)} / ${rule.interval}h</span>
+                </div>
+                <div class="prog-bg">
+                    <div class="prog-fill" style="width:${pct}%; background:${color};"></div>
+                </div>
+                <div class="maint-bottom">
+                    ${statusText}
+                    ${btnHtml}
+                </div>
+                <details class="maint-details">
+                    <summary>Istruzioni e dettagli…</summary>
+                    <p class="maint-info-text">${rule.info}</p>
+                </details>
+            `;
+            container.appendChild(item);
         }
-    </script>
+    }
+
+    function maintDone(key) {
+        const tool = tools.find(t => t.id === currentToolId);
+        if (!tool) return;
+        tool.maintenanceHistory[key] = tool.hours;
+        save();
+        renderMaintenance(tool);
+        toast(`${maintenanceRules[key].name} registrata`);
+    }
+
+    // ─────────────────────────────────────────────
+    // MIX CALCULATOR
+    // ─────────────────────────────────────────────
+    function calcMix() {
+        const tool = tools.find(t => t.id === currentToolId);
+        if (!tool) return;
+        const liters = parseFloat(document.getElementById('petrol-liters').value);
+        if (liters > 0) {
+            document.getElementById('oil-result').textContent = Math.round(liters * tool.mix * 10);
+        } else {
+            document.getElementById('oil-result').textContent = '—';
+        }
+    }
+
+    // ─────────────────────────────────────────────
+    // ADD MODAL
+    // ─────────────────────────────────────────────
+    function openAddModal() {
+        document.getElementById('f-brand').value = '';
+        document.getElementById('f-model').value = '';
+        document.getElementById('f-type').value = '2 tempi';
+        document.getElementById('f-mix').value = '';
+        openModal('add-modal');
+    }
+
+    function closeAddModal() { closeModal('add-modal'); }
+
+    function saveTool() {
+        const brand = document.getElementById('f-brand').value.trim();
+        const model = document.getElementById('f-model').value.trim();
+        const mix = parseFloat(document.getElementById('f-mix').value);
+
+        if (!brand || !model || isNaN(mix)) {
+            toast('Compila tutti i campi correttamente.', '⚠️'); return;
+        }
+
+        tools.push({
+            id: Date.now(),
+            brand, model,
+            type: document.getElementById('f-type').value,
+            mix,
+            hours: 0,
+            maintenanceHistory: { filter: 0, spark: 0, gear: 0, carb: 0 }
+        });
+        save();
+        renderDashboard();
+        closeAddModal();
+        toast(`${brand} ${model} aggiunto`);
+    }
+
+    // ─────────────────────────────────────────────
+    // EDIT MODAL
+    // ─────────────────────────────────────────────
+    function openEditModal() {
+        const tool = tools.find(t => t.id === currentToolId);
+        if (!tool) return;
+        document.getElementById('ef-brand').value = tool.brand;
+        document.getElementById('ef-model').value = tool.model;
+        document.getElementById('ef-type').value = tool.type;
+        document.getElementById('ef-mix').value = tool.mix;
+        openModal('edit-modal');
+    }
+
+    function closeEditModal() { closeModal('edit-modal'); }
+
+    function updateTool() {
+        const brand = document.getElementById('ef-brand').value.trim();
+        const model = document.getElementById('ef-model').value.trim();
+        const mix = parseFloat(document.getElementById('ef-mix').value);
+
+        if (!brand || !model || isNaN(mix)) {
+            toast('Compila tutti i campi correttamente.', '⚠️'); return;
+        }
+
+        const tool = tools.find(t => t.id === currentToolId);
+        if (!tool) return;
+        tool.brand = brand;
+        tool.model = model;
+        tool.type = document.getElementById('ef-type').value;
+        tool.mix = mix;
+        save();
+        closeEditModal();
+
+        // Refresh wherever we are
+        if (document.getElementById('tool-detail-view').style.display !== 'none') {
+            refreshDetailHeader(tool);
+        } else {
+            renderDashboard();
+        }
+        toast(`${brand} ${model} aggiornato`);
+    }
+
+    // ─────────────────────────────────────────────
+    // DELETE
+    // ─────────────────────────────────────────────
+    function openDeleteConfirm() { openModal('delete-modal'); }
+    function closeDeleteConfirm() { closeModal('delete-modal'); }
+
+    function confirmDelete() {
+        const tool = tools.find(t => t.id === currentToolId);
+        const name = tool ? `${tool.brand} ${tool.model}` : 'strumento';
+        tools = tools.filter(t => t.id !== currentToolId);
+        save();
+        closeDeleteConfirm();
+
+        // If we were in detail, go back to dashboard
+        if (document.getElementById('tool-detail-view').style.display !== 'none') {
+            closeDetail();
+        } else {
+            renderDashboard();
+        }
+        currentToolId = null;
+        toast(`${name} eliminato`, '🗑');
+    }
+
+    // ─────────────────────────────────────────────
+    // EXPORT / IMPORT
+    // ─────────────────────────────────────────────
+    function exportData() {
+        if (tools.length === 0) { toast('Nessun dato da salvare.', '⚠️'); return; }
+        const url = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tools));
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `gardentool_backup_${new Date().toISOString().slice(0,10)}.json`;
+        a.click();
+        toast('Backup scaricato');
+    }
+
+    function importData(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = e => {
+            try {
+                const parsed = JSON.parse(e.target.result);
+                if (Array.isArray(parsed)) {
+                    pendingImportData = parsed;
+                    openModal('import-modal');
+                } else {
+                    toast('File non valido per questa app.', '❌');
+                }
+            } catch {
+                toast('Errore nella lettura del file.', '❌');
+            }
+        };
+        reader.readAsText(file);
+        event.target.value = '';
+    }
+
+    function cancelImport() {
+        pendingImportData = null;
+        closeModal('import-modal');
+    }
+
+    function confirmImport() {
+        if (!pendingImportData) return;
+        tools = pendingImportData;
+        pendingImportData = null;
+        save();
+        renderDashboard();
+        closeModal('import-modal');
+        toast(`${tools.length} strumenti ripristinati`);
+    }
+
+    // ─────────────────────────────────────────────
+    // MODAL HELPERS
+    // ─────────────────────────────────────────────
+    function openModal(id) {
+        document.getElementById(id).classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // Close modals on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', e => {
+            if (e.target === overlay) {
+                overlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+
+    // ESC key
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal-overlay.open').forEach(m => {
+                m.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        }
+    });
+</script>
 </body>
 </html>
