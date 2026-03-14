@@ -44,7 +44,6 @@
             --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
             --header-height: 64px;
-            --sidebar-width: 260px;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -58,14 +57,11 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ── SCROLLBAR ── */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 99px; }
 
-        /* ══════════════════════════════════════════════════
-           HEADER
-        ══════════════════════════════════════════════════ */
+        /* ══ HEADER ══ */
         .app-header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -121,13 +117,8 @@
             50% { opacity: 0.5; transform: scale(0.8); }
         }
 
-        /* ══════════════════════════════════════════════════
-           LAYOUT
-        ══════════════════════════════════════════════════ */
-        .app-body {
-            padding-top: var(--header-height);
-            min-height: 100vh;
-        }
+        /* ══ LAYOUT ══ */
+        .app-body { padding-top: var(--header-height); min-height: 100vh; }
 
         .page {
             max-width: 1100px;
@@ -135,9 +126,7 @@
             padding: 2rem 1.5rem;
         }
 
-        /* ══════════════════════════════════════════════════
-           ALERT BANNER
-        ══════════════════════════════════════════════════ */
+        /* ══ ALERT BANNER ══ */
         .alerts-banner {
             display: none;
             background: var(--red-light);
@@ -165,12 +154,7 @@
             font-size: 0.9rem;
         }
 
-        .alerts-banner-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
+        .alerts-banner-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
 
         .alerts-banner-list li {
             font-size: 0.85rem;
@@ -179,15 +163,9 @@
             position: relative;
         }
 
-        .alerts-banner-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-        }
+        .alerts-banner-list li::before { content: '→'; position: absolute; left: 0; }
 
-        /* ══════════════════════════════════════════════════
-           DASHBOARD HEADER
-        ══════════════════════════════════════════════════ */
+        /* ══ DASH HEADER ══ */
         .dash-header {
             display: flex;
             align-items: center;
@@ -197,28 +175,12 @@
             gap: 1rem;
         }
 
-        .dash-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            color: var(--text-primary);
-        }
+        .dash-title { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); }
+        .dash-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-top: 2px; }
 
-        .dash-subtitle {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
+        .dash-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
-        .dash-actions {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        /* ══════════════════════════════════════════════════
-           BUTTONS
-        ══════════════════════════════════════════════════ */
+        /* ══ BUTTONS ══ */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -236,56 +198,20 @@
             text-decoration: none;
         }
 
-        .btn-primary {
-            background: var(--green-600);
-            color: white;
-        }
+        .btn-primary { background: var(--green-600); color: white; }
+        .btn-primary:hover { background: var(--green-700); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(51,128,66,0.4); }
 
-        .btn-primary:hover {
-            background: var(--green-700);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(51, 128, 66, 0.4);
-        }
+        .btn-ghost { background: transparent; color: var(--text-secondary); border: 1.5px solid var(--surface-3); }
+        .btn-ghost:hover { background: var(--surface-2); border-color: var(--green-300); color: var(--green-700); }
 
-        .btn-ghost {
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1.5px solid var(--surface-3);
-        }
+        .btn-danger { background: var(--red-light); color: var(--red); border: 1.5px solid #fca5a5; }
+        .btn-danger:hover { background: var(--red); color: white; }
 
-        .btn-ghost:hover {
-            background: var(--surface-2);
-            border-color: var(--green-300);
-            color: var(--green-700);
-        }
-
-        .btn-danger {
-            background: var(--red-light);
-            color: var(--red);
-            border: 1.5px solid #fca5a5;
-        }
-
-        .btn-danger:hover {
-            background: var(--red);
-            color: white;
-        }
-
-        .btn-sm {
-            padding: 0.4rem 0.75rem;
-            font-size: 0.82rem;
-        }
-
-        .btn-icon {
-            padding: 0.5rem;
-            width: 34px;
-            height: 34px;
-        }
-
+        .btn-sm { padding: 0.4rem 0.75rem; font-size: 0.82rem; }
+        .btn-icon { padding: 0.5rem; width: 34px; height: 34px; }
         .btn-full { width: 100%; }
 
-        /* ══════════════════════════════════════════════════
-           TOOL CARDS GRID
-        ══════════════════════════════════════════════════ */
+        /* ══ TOOLS GRID ══ */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -316,48 +242,18 @@
             transition: var(--transition);
         }
 
-        .tool-card:hover {
-            box-shadow: var(--shadow-md);
-            border-color: var(--green-300);
-            transform: translateY(-2px);
-        }
+        /* Chainsaw accent color */
+        .tool-card.chainsaw-card::before { background: #f97316; }
+        .tool-card.chainsaw-card:hover { border-color: #fed7aa; }
 
+        .tool-card:hover { box-shadow: var(--shadow-md); border-color: var(--green-300); transform: translateY(-2px); }
         .tool-card:hover::before { opacity: 1; }
 
-        .tool-card-top {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-
-        .tool-card-identity {}
-
-        .tool-card-brand {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .tool-card-model {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            font-family: 'DM Mono', monospace;
-            margin-top: 2px;
-        }
-
-        .tool-card-actions {
-            display: flex;
-            gap: 4px;
-            flex-shrink: 0;
-        }
-
-        .tool-card-meta {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
+        .tool-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+        .tool-card-brand { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
+        .tool-card-model { font-size: 0.88rem; color: var(--text-muted); font-family: 'DM Mono', monospace; margin-top: 2px; }
+        .tool-card-actions { display: flex; gap: 4px; flex-shrink: 0; }
+        .tool-card-meta { display: flex; gap: 8px; flex-wrap: wrap; }
 
         .tag {
             display: inline-flex;
@@ -369,30 +265,12 @@
             font-weight: 500;
         }
 
-        .tag-neutral {
-            background: var(--surface-2);
-            color: var(--text-secondary);
-        }
+        .tag-neutral { background: var(--surface-2); color: var(--text-secondary); }
+        .tag-chainsaw { background: #fff7ed; color: #9a3412; border: 1px solid #fed7aa; }
 
-        .tool-card-hours {
-            display: flex;
-            align-items: baseline;
-            gap: 6px;
-        }
-
-        .hours-big {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--green-700);
-            font-family: 'DM Mono', monospace;
-            letter-spacing: -0.04em;
-            line-height: 1;
-        }
-
-        .hours-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
+        .tool-card-hours { display: flex; align-items: baseline; gap: 6px; }
+        .hours-big { font-size: 2.2rem; font-weight: 700; color: var(--green-700); font-family: 'DM Mono', monospace; letter-spacing: -0.04em; line-height: 1; }
+        .hours-label { font-size: 0.85rem; color: var(--text-muted); }
 
         .tool-card-status {
             display: flex;
@@ -404,50 +282,21 @@
             font-weight: 600;
         }
 
-        .status-ok {
-            background: var(--green-100);
-            color: var(--green-700);
-        }
+        .status-ok { background: var(--green-100); color: var(--green-700); }
+        .status-warning { background: var(--amber-light); color: #92400e; }
+        .status-danger { background: var(--red-light); color: #991b1b; }
 
-        .status-warning {
-            background: var(--amber-light);
-            color: #92400e;
-        }
-
-        .status-danger {
-            background: var(--red-light);
-            color: #991b1b;
-        }
-
-        .status-dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
         .status-ok .status-dot { background: var(--green-500); }
         .status-warning .status-dot { background: var(--amber); animation: pulse-dot 1.5s ease-in-out infinite; }
         .status-danger .status-dot { background: var(--red); animation: pulse-dot 1s ease-in-out infinite; }
 
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-muted);
-        }
-
-        .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
+        .empty-state { grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
+        .empty-icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.5; }
         .empty-state h3 { color: var(--text-secondary); margin-bottom: 0.5rem; }
         .empty-state p { font-size: 0.9rem; margin-bottom: 1.5rem; }
 
-        /* ══════════════════════════════════════════════════
-           DETAIL VIEW
-        ══════════════════════════════════════════════════ */
+        /* ══ DETAIL VIEW ══ */
         #tool-detail-view { display: none; }
 
         .detail-hero {
@@ -460,8 +309,10 @@
             overflow: hidden;
         }
 
+        .detail-hero.chainsaw-hero { background: linear-gradient(135deg, #1c0a00 0%, #431407 100%); }
+
         .detail-hero::after {
-            content: '🌿';
+            content: attr(data-emoji);
             position: absolute;
             right: 2rem; top: 50%;
             transform: translateY(-50%);
@@ -470,60 +321,18 @@
             pointer-events: none;
         }
 
-        .detail-hero-brand {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--green-300);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
+        .detail-hero-brand { font-size: 0.85rem; font-weight: 600; color: var(--green-300); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+        .detail-hero.chainsaw-hero .detail-hero-brand { color: #fdba74; }
+        .detail-hero-model { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 0.25rem; }
+        .detail-hero-meta { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem; }
 
-        .detail-hero-model {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: -0.04em;
-            margin-bottom: 0.25rem;
-        }
+        .detail-hero-hours { display: flex; align-items: baseline; gap: 8px; }
+        .detail-hours-num { font-family: 'DM Mono', monospace; font-size: 3.5rem; font-weight: 700; letter-spacing: -0.06em; line-height: 1; }
+        .detail-hours-unit { font-size: 1rem; color: rgba(255,255,255,0.5); }
 
-        .detail-hero-meta {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.5);
-            margin-bottom: 1.5rem;
-        }
+        .add-hours-row { display: flex; gap: 8px; align-items: center; margin-top: 1.25rem; flex-wrap: wrap; }
 
-        .detail-hero-hours {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-        }
-
-        .detail-hours-num {
-            font-family: 'DM Mono', monospace;
-            font-size: 3.5rem;
-            font-weight: 700;
-            letter-spacing: -0.06em;
-            line-height: 1;
-        }
-
-        .detail-hours-unit {
-            font-size: 1rem;
-            color: rgba(255,255,255,0.5);
-        }
-
-        .add-hours-row {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            margin-top: 1.25rem;
-            flex-wrap: wrap;
-        }
-
-        .hours-input-wrap {
-            position: relative;
-            flex: 1;
-            min-width: 140px;
-        }
+        .hours-input-wrap { position: relative; flex: 1; min-width: 140px; }
 
         .hours-input-wrap input {
             width: 100%;
@@ -538,20 +347,9 @@
         }
 
         .hours-input-wrap input::placeholder { color: rgba(255,255,255,0.4); }
+        .hours-input-wrap input:focus { outline: none; border-color: var(--green-400); background: rgba(255,255,255,0.15); }
 
-        .hours-input-wrap input:focus {
-            outline: none;
-            border-color: var(--green-400);
-            background: rgba(255,255,255,0.15);
-        }
-
-        .hours-input-unit {
-            position: absolute;
-            right: 10px; top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255,255,255,0.4);
-            font-size: 0.82rem;
-        }
+        .hours-input-unit { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.4); font-size: 0.82rem; }
 
         .btn-add-hours {
             background: var(--green-500);
@@ -567,21 +365,30 @@
             white-space: nowrap;
         }
 
-        .btn-add-hours:hover {
-            background: var(--green-400);
-            transform: translateY(-1px);
+        .btn-add-hours:hover { background: var(--green-400); transform: translateY(-1px); }
+
+        /* Chainsaw-specific bar oil panel */
+        .panel-chainsaw-oil {
+            border-color: #fed7aa !important;
+            background: #fff7ed !important;
         }
+
+        .panel-chainsaw-oil .panel-title { color: #9a3412; }
 
         /* ── Detail grid ── */
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-        }
+        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
 
-        @media (max-width: 700px) {
-            .detail-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 700px) { .detail-grid { grid-template-columns: 1fr; } }
+
+        /* Chainsaw gets a wider layout */
+        .detail-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
+
+        @media (max-width: 900px) { .detail-grid-3 { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) { .detail-grid-3 { grid-template-columns: 1fr; } }
+
+        .panel-span-2 { grid-column: span 2; }
+
+        @media (max-width: 900px) { .panel-span-2 { grid-column: span 1; } }
 
         .panel {
             background: var(--surface-0);
@@ -591,100 +398,86 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .panel-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .panel-title { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 6px; }
 
-        /* ── Maintenance items ── */
-        .maint-item {
-            padding: 1rem;
-            background: var(--surface-1);
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--surface-3);
-            margin-bottom: 0.75rem;
-        }
-
+        /* Maint items */
+        .maint-item { padding: 1rem; background: var(--surface-1); border-radius: var(--radius-sm); border: 1px solid var(--surface-3); margin-bottom: 0.75rem; }
         .maint-item:last-child { margin-bottom: 0; }
+        .maint-item.danger-item { background: #fff5f5; border-color: #fca5a5; }
+        .maint-item.warning-item { background: #fffbeb; border-color: #fde68a; }
 
-        .maint-top {
+        .maint-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .maint-name { font-size: 0.88rem; font-weight: 600; color: var(--text-primary); }
+        .maint-count { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--text-muted); }
+
+        .prog-bg { height: 6px; background: var(--surface-3); border-radius: 99px; overflow: hidden; margin-bottom: 0.6rem; }
+        .prog-fill { height: 100%; border-radius: 99px; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s; }
+
+        .maint-bottom { display: flex; justify-content: space-between; align-items: center; }
+        .maint-status-text { font-size: 0.8rem; font-weight: 600; }
+
+        /* Safety alert badge for chainsaw */
+        .safety-alert {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
+            align-items: flex-start;
+            gap: 8px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: var(--radius-sm);
+            padding: 0.6rem 0.8rem;
+            margin-top: 0.6rem;
+            font-size: 0.78rem;
+            color: #9a3412;
+            line-height: 1.4;
         }
 
-        .maint-name {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
+        .safety-alert-icon { font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
 
-        .maint-count {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
+        .maint-details { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px dashed var(--surface-3); }
 
-        .prog-bg {
-            height: 6px;
-            background: var(--surface-3);
-            border-radius: 99px;
-            overflow: hidden;
-            margin-bottom: 0.6rem;
-        }
+        summary { font-size: 0.8rem; color: var(--green-600); cursor: pointer; font-weight: 600; user-select: none; }
+        .chainsaw-summary { color: #c2410c; }
 
-        .prog-fill {
+        .maint-info-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; margin-top: 0.5rem; }
+
+        /* Bar oil tracker */
+        .oil-tracker { display: flex; flex-direction: column; gap: 0.75rem; }
+
+        .oil-level-bar { height: 24px; background: var(--surface-3); border-radius: var(--radius-sm); overflow: hidden; position: relative; }
+
+        .oil-level-fill {
             height: 100%;
-            border-radius: 99px;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s;
-        }
-
-        .maint-bottom {
+            background: linear-gradient(90deg, #f97316, #fb923c);
+            border-radius: var(--radius-sm);
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
         }
 
-        .maint-status-text {
-            font-size: 0.8rem;
+        .oil-level-text { font-size: 0.7rem; font-weight: 700; color: white; white-space: nowrap; }
+
+        .oil-tracker-label { font-size: 0.82rem; color: #9a3412; font-weight: 600; }
+        .oil-tracker-sub { font-size: 0.78rem; color: #c2410c; opacity: 0.7; }
+
+        .oil-refill-btn {
+            background: #fff7ed;
+            border: 1.5px solid #fed7aa;
+            color: #9a3412;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.82rem;
             font-weight: 600;
-        }
-
-        .maint-details {
-            margin-top: 0.75rem;
-            padding-top: 0.75rem;
-            border-top: 1px dashed var(--surface-3);
-        }
-
-        summary {
-            font-size: 0.8rem;
-            color: var(--green-600);
             cursor: pointer;
-            font-weight: 600;
-            user-select: none;
+            transition: var(--transition);
         }
 
-        .maint-info-text {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            line-height: 1.55;
-            margin-top: 0.5rem;
-        }
+        .oil-refill-btn:hover { background: #f97316; color: white; border-color: #f97316; }
 
-        /* ── Mix calculator ── */
-        .calc-label {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 0.4rem;
-            display: block;
-        }
+        /* Calc */
+        .calc-label { font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.4rem; display: block; }
 
         .calc-input {
             width: 100%;
@@ -699,126 +492,17 @@
             margin-bottom: 1rem;
         }
 
-        .calc-input:focus {
-            outline: none;
-            border-color: var(--green-400);
-            background: var(--surface-0);
-        }
+        .calc-input:focus { outline: none; border-color: var(--green-400); background: var(--surface-0); }
 
-        .calc-result-card {
-            background: var(--green-100);
-            border: 1px solid var(--green-300);
-            border-radius: var(--radius-md);
-            padding: 1.25rem;
-            text-align: center;
-        }
+        .calc-result-card { background: var(--green-100); border: 1px solid var(--green-300); border-radius: var(--radius-md); padding: 1.25rem; text-align: center; }
+        .calc-result-label { font-size: 0.82rem; color: var(--green-700); font-weight: 600; margin-bottom: 0.25rem; }
+        .calc-result-value { font-family: 'DM Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--green-800); line-height: 1; }
+        .calc-result-unit { font-size: 0.9rem; color: var(--green-600); font-weight: 500; }
+        .calc-hint { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.4; }
 
-        .calc-result-label {
-            font-size: 0.82rem;
-            color: var(--green-700);
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .calc-result-value {
-            font-family: 'DM Mono', monospace;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--green-800);
-            line-height: 1;
-        }
-
-        .calc-result-unit {
-            font-size: 0.9rem;
-            color: var(--green-600);
-            font-weight: 500;
-        }
-
-        .calc-hint {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            line-height: 1.4;
-        }
-
-        /* ══════════════════════════════════════════════════
-           MODAL
-        ══════════════════════════════════════════════════ */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.45);
-            backdrop-filter: blur(6px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 500;
-            padding: 1rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-
-        .modal-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-box {
-            background: var(--surface-0);
-            border-radius: var(--radius-xl);
-            padding: 2rem;
-            width: 100%;
-            max-width: 460px;
-            box-shadow: var(--shadow-lg);
-            transform: scale(0.96) translateY(8px);
-            transition: var(--transition);
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-overlay.open .modal-box {
-            transform: scale(1) translateY(0);
-        }
-
-        .modal-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.75rem;
-        }
-
-        .modal-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .modal-close {
-            width: 32px; height: 32px;
-            border-radius: 99px;
-            border: none;
-            background: var(--surface-2);
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: var(--transition);
-        }
-
-        .modal-close:hover { background: var(--red-light); color: var(--red); }
-
-        /* Form fields */
+        /* Bar length field */
         .form-field { margin-bottom: 1.1rem; }
-
-        .form-label {
-            display: block;
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 0.4rem;
-        }
-
+        .form-label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.4rem; }
         .form-input, .form-select {
             width: 100%;
             padding: 0.7rem 1rem;
@@ -836,40 +520,92 @@
             outline: none;
             border-color: var(--green-400);
             background: var(--surface-0);
-            box-shadow: 0 0 0 3px rgba(93, 188, 110, 0.15);
+            box-shadow: 0 0 0 3px rgba(93,188,110,0.15);
         }
 
-        /* ══════════════════════════════════════════════════
-           CONFIRM MODAL (delete)
-        ══════════════════════════════════════════════════ */
-        .confirm-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
+        /* Chainsaw-specific form fields */
+        .chainsaw-fields {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin-bottom: 1.1rem;
         }
 
-        .confirm-title {
-            font-size: 1.1rem;
+        .chainsaw-fields-title {
+            font-size: 0.8rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .confirm-text {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
-
-        .confirm-actions {
+            color: #9a3412;
+            margin-bottom: 0.75rem;
             display: flex;
-            gap: 8px;
+            align-items: center;
+            gap: 5px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
+        /* Hide/show conditional fields */
+        .chainsaw-only { display: none; }
+        .trimotor-only { display: none; }
+
+        /* ══ MODAL ══ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 500;
+            padding: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.open { opacity: 1; visibility: visible; }
+
+        .modal-box {
+            background: var(--surface-0);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            width: 100%;
+            max-width: 460px;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.96) translateY(8px);
+            transition: var(--transition);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.open .modal-box { transform: scale(1) translateY(0); }
+
+        .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.75rem; }
+        .modal-title { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
+
+        .modal-close {
+            width: 32px; height: 32px;
+            border-radius: 99px;
+            border: none;
+            background: var(--surface-2);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover { background: var(--red-light); color: var(--red); }
+
+        /* ══ CONFIRM MODAL ══ */
+        .confirm-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+        .confirm-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .confirm-text { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5; }
+        .confirm-actions { display: flex; gap: 8px; }
         .confirm-actions .btn { flex: 1; }
 
-        /* ══════════════════════════════════════════════════
-           TOAST
-        ══════════════════════════════════════════════════ */
+        /* ══ TOAST ══ */
         #toast-container {
             position: fixed;
             bottom: 1.5rem;
@@ -897,18 +633,10 @@
 
         .toast.out { animation: toastOut 0.3s ease forwards; }
 
-        @keyframes toastIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+        @keyframes toastIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes toastOut { to { opacity: 0; transform: translateX(20px); } }
 
-        @keyframes toastOut {
-            to { opacity: 0; transform: translateX(20px); }
-        }
-
-        /* ══════════════════════════════════════════════════
-           RESPONSIVE
-        ══════════════════════════════════════════════════ */
+        /* ══ RESPONSIVE ══ */
         @media (max-width: 600px) {
             .page { padding: 1.25rem 1rem; }
             .dash-header { flex-direction: column; align-items: flex-start; }
@@ -932,7 +660,7 @@
 
 <div class="app-body">
 
-    <!-- ═══════════ DASHBOARD ═══════════ -->
+    <!-- ═══════ DASHBOARD ═══════ -->
     <div class="page" id="dashboard-view">
 
         <div id="alerts-banner" class="alerts-banner">
@@ -956,7 +684,7 @@
         <div class="tools-grid" id="tools-container"></div>
     </div>
 
-    <!-- ═══════════ DETAIL ═══════════ -->
+    <!-- ═══════ DETAIL ═══════ -->
     <div class="page" id="tool-detail-view">
 
         <div style="margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
@@ -967,7 +695,7 @@
             </div>
         </div>
 
-        <div class="detail-hero">
+        <div class="detail-hero" id="detail-hero" data-emoji="🌿">
             <div class="detail-hero-brand" id="detail-brand">—</div>
             <div class="detail-hero-model" id="detail-model">—</div>
             <div class="detail-hero-meta" id="detail-meta">—</div>
@@ -984,23 +712,9 @@
             </div>
         </div>
 
-        <div class="detail-grid">
-            <div class="panel">
-                <div class="panel-title">🛠 Stato Manutenzione</div>
-                <div id="maint-container"></div>
-            </div>
-            <div class="panel">
-                <div class="panel-title">⛽ Calcolatore Miscela</div>
-                <p class="calc-hint">Inserisci i litri di benzina per calcolare l'olio necessario alla percentuale di miscela configurata (<span id="calc-mix-perc">—</span>%).</p>
-                <label class="calc-label">Litri di benzina</label>
-                <input type="number" class="calc-input" id="petrol-liters" placeholder="Es. 5" step="0.5" min="0.5" oninput="calcMix()">
-                <div class="calc-result-card">
-                    <div class="calc-result-label">Olio da aggiungere</div>
-                    <div class="calc-result-value" id="oil-result">—</div>
-                    <div class="calc-result-unit">ml</div>
-                </div>
-            </div>
-        </div>
+        <!-- Panels rendered dynamically here -->
+        <div id="detail-panels-container"></div>
+
     </div>
 
 </div>
@@ -1013,14 +727,21 @@
             <button class="modal-close" onclick="closeAddModal()">×</button>
         </div>
         <div class="form-field">
+            <label class="form-label">Categoria</label>
+            <select class="form-select" id="f-category" onchange="onCategoryChange('f')">
+                <option value="trimmer">Decespugliatore / Troncatrice</option>
+                <option value="chainsaw">Motosega 🪚</option>
+            </select>
+        </div>
+        <div class="form-field">
             <label class="form-label">Marca</label>
             <input class="form-input" type="text" id="f-brand" placeholder="Es. Stihl, Husqvarna…" required>
         </div>
         <div class="form-field">
             <label class="form-label">Modello</label>
-            <input class="form-input" type="text" id="f-model" placeholder="Es. FS 450" required>
+            <input class="form-input" type="text" id="f-model" placeholder="Es. MS 261 C" required>
         </div>
-        <div class="form-field">
+        <div class="form-field trimotor-only" id="f-type-field">
             <label class="form-label">Tipo motore</label>
             <select class="form-select" id="f-type">
                 <option value="2 tempi">2 tempi</option>
@@ -1030,6 +751,18 @@
         <div class="form-field">
             <label class="form-label">Percentuale miscela (%)</label>
             <input class="form-input" type="number" id="f-mix" step="0.1" min="0" placeholder="Es. 2">
+        </div>
+        <!-- Chainsaw extra fields -->
+        <div class="chainsaw-fields chainsaw-only" id="f-chainsaw-extra">
+            <div class="chainsaw-fields-title">🪚 Dati Motosega</div>
+            <div class="form-field" style="margin-bottom:0.75rem">
+                <label class="form-label">Lunghezza barra guida (cm)</label>
+                <input class="form-input" type="number" id="f-bar" step="1" min="20" placeholder="Es. 35, 40, 50…">
+            </div>
+            <div class="form-field" style="margin-bottom:0">
+                <label class="form-label">Tipo olio barra preferito</label>
+                <input class="form-input" type="text" id="f-baroil" placeholder="Es. Stihl ForestPlus, generico…">
+            </div>
         </div>
         <button class="btn btn-primary btn-full" style="margin-top: 0.5rem;" onclick="saveTool()">Salva strumento</button>
     </div>
@@ -1050,7 +783,7 @@
             <label class="form-label">Modello</label>
             <input class="form-input" type="text" id="ef-model" required>
         </div>
-        <div class="form-field">
+        <div class="form-field" id="ef-type-field">
             <label class="form-label">Tipo motore</label>
             <select class="form-select" id="ef-type">
                 <option value="2 tempi">2 tempi</option>
@@ -1060,6 +793,18 @@
         <div class="form-field">
             <label class="form-label">Percentuale miscela (%)</label>
             <input class="form-input" type="number" id="ef-mix" step="0.1" min="0">
+        </div>
+        <!-- Chainsaw extra fields edit -->
+        <div class="chainsaw-fields" id="ef-chainsaw-extra" style="display:none;">
+            <div class="chainsaw-fields-title">🪚 Dati Motosega</div>
+            <div class="form-field" style="margin-bottom:0.75rem">
+                <label class="form-label">Lunghezza barra guida (cm)</label>
+                <input class="form-input" type="number" id="ef-bar" step="1" min="20">
+            </div>
+            <div class="form-field" style="margin-bottom:0">
+                <label class="form-label">Tipo olio barra preferito</label>
+                <input class="form-input" type="text" id="ef-baroil">
+            </div>
         </div>
         <button class="btn btn-primary btn-full" style="margin-top: 0.5rem;" onclick="updateTool()">Aggiorna strumento</button>
     </div>
@@ -1091,481 +836,803 @@
     </div>
 </div>
 
-<!-- ══ TOAST ══ -->
 <div id="toast-container"></div>
 
 <script>
-    // ─────────────────────────────────────────────
-    // STATE
-    // ─────────────────────────────────────────────
-    let tools = [];
-    let currentToolId = null;
-    let pendingImportData = null;
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let tools = [];
+let currentToolId = null;
+let pendingImportData = null;
 
-    const maintenanceRules = {
+// ─────────────────────────────────────────────
+// MAINTENANCE RULES — by category
+// ─────────────────────────────────────────────
+const maintenanceRules = {
+    trimmer: {
         filter: {
             name: "Pulizia filtro aria",
             interval: 10,
-            info: "Rimuovi il coperchio del filtro. Se è in spugna, lavalo con acqua calda e sapone, strizzalo e lascialo asciugare. Se è in carta, soffialo delicatamente con aria compressa dall'interno verso l'esterno. Un filtro intasato aumenta i consumi e usura il motore."
+            info: "Rimuovi il coperchio del filtro. Se è in spugna, lavalo con acqua calda e sapone, strizzalo e lascialo asciugare. Se è in carta, soffialo delicatamente con aria compressa dall'interno verso l'esterno. Un filtro intasato aumenta i consumi e usura il motore.",
+            safetyAlert: null
         },
         spark: {
             name: "Controllo candela",
             interval: 25,
-            info: "Smonta la candela usando l'apposita chiave. Pulisci gli elettrodi con una spazzola metallica per rimuovere i depositi carboniosi. Controlla che la distanza tra gli elettrodi sia corretta (circa 0.5 mm). Se gli elettrodi sono consumati, sostituisci la candela."
+            info: "Smonta la candela usando l'apposita chiave. Pulisci gli elettrodi con una spazzola metallica per rimuovere i depositi carboniosi. Controlla che la distanza tra gli elettrodi sia corretta (circa 0.5 mm). Se gli elettrodi sono consumati, sostituisci la candela.",
+            safetyAlert: null
         },
         gear: {
             name: "Ingrassaggio coppia conica",
             interval: 30,
-            info: "Pulisci la zona attorno al tappo della testina ingranaggi prima di svitarlo. Inserisci grasso specifico per coppie coniche (al litio/molibdeno) girando leggermente il disco per far distribuire il grasso sui denti. Non riempire fino all'orlo per evitare sovrappressioni."
+            info: "Pulisci la zona attorno al tappo della testina ingranaggi prima di svitarlo. Inserisci grasso specifico per coppie coniche (al litio/molibdeno) girando leggermente il disco per far distribuire il grasso sui denti. Non riempire fino all'orlo per evitare sovrappressioni.",
+            safetyAlert: null
         },
         carb: {
             name: "Pulizia carburatore e pescante",
             interval: 50,
-            info: "Controlla il filtro pescante all'interno del serbatoio della miscela (sostituiscilo se duro o sporco). Per il carburatore, è consigliata una pulizia delle membrane o l'uso di uno spray pulitore specifico se noti cali di potenza o spegnimenti al minimo."
+            info: "Controlla il filtro pescante all'interno del serbatoio della miscela (sostituiscilo se duro o sporco). Per il carburatore, è consigliata una pulizia delle membrane o l'uso di uno spray pulitore specifico se noti cali di potenza o spegnimenti al minimo.",
+            safetyAlert: null
         }
-    };
-
-    // ─────────────────────────────────────────────
-    // INIT & PERSIST
-    // ─────────────────────────────────────────────
-    window.onload = () => {
-        const saved = localStorage.getItem('gardentool_data');
-        if (saved) tools = JSON.parse(saved);
-        renderDashboard();
-    };
-
-    function save() {
-        localStorage.setItem('gardentool_data', JSON.stringify(tools));
+    },
+    chainsaw: {
+        chain: {
+            name: "Affilatura e Tensione Catena",
+            interval: 2,
+            info: "Una catena che produce segatura fine invece di trucioli va affilata. Usa una lima tonda del diametro corretto (es. 4.0mm o 4.8mm) seguendo l'angolo del dente (solitamente 30°). Controlla che la catena sia tesa ma scorra liberamente: tirandola verso il basso, le maglie motrici non devono uscire completamente dalla guida della barra.",
+            safetyAlert: "Una catena lenta può saltare fuori; una non affilata surriscalda il motore."
+        },
+        bar: {
+            name: "Pulizia Barra e Guida Olio",
+            interval: 5,
+            info: "Rimuovi il carter laterale. Usa un raschietto per pulire la scanalatura della barra dall'accumulo di segatura e olio. Verifica che il foro di ingresso dell'olio sulla barra sia libero. Se la barra ha un rocchetto in punta, ingrassalo se previsto dal costruttore. Ruota la barra di 180° ogni volta che la pulisci per uniformare l'usura.",
+            safetyAlert: "La mancanza di lubrificazione distrugge barra e catena in pochi minuti."
+        },
+        brake: {
+            name: "Controllo Freno Catena e Pignone",
+            interval: 20,
+            info: "Pulisci accuratamente il meccanismo del freno catena e la molla interna. Verifica che il nastro del freno non sia usurato o spezzato. Controlla il pignone (rocchetto di trascinamento): se i solchi lasciati dalla catena superano i 0.5 mm, va sostituito per evitare che rovini le maglie motrici della nuova catena.",
+            safetyAlert: "Il freno catena è l'unico dispositivo che ti protegge in caso di contraccolpo (kickback)."
+        },
+        engine: {
+            name: "Manutenzione Motore e Raffreddamento",
+            interval: 50,
+            info: "Oltre alla pulizia del filtro aria e della candela, soffia con aria compressa le alette di raffreddamento del cilindro e i fori di aerazione del carter avviamento. Rimuovi i residui di segatura che impediscono il passaggio dell'aria.",
+            safetyAlert: "Le motoseghe lavorano ad alti giri; un raffreddamento scarso porta rapidamente al grippaggio del pistone."
+        }
     }
+};
 
-    function fmtHours(h) {
-        return Number.isInteger(h) ? h : h.toFixed(1);
-    }
+function getRules(tool) {
+    return tool.category === 'chainsaw' ? maintenanceRules.chainsaw : maintenanceRules.trimmer;
+}
 
-    // ─────────────────────────────────────────────
-    // TOAST
-    // ─────────────────────────────────────────────
-    function toast(msg, emoji = '✅') {
-        const el = document.createElement('div');
-        el.className = 'toast';
-        el.innerHTML = `<span>${emoji}</span> ${msg}`;
-        document.getElementById('toast-container').appendChild(el);
-        setTimeout(() => {
-            el.classList.add('out');
-            setTimeout(() => el.remove(), 300);
-        }, 2800);
-    }
-
-    // ─────────────────────────────────────────────
-    // DASHBOARD RENDER
-    // ─────────────────────────────────────────────
-    function renderDashboard() {
-        const container = document.getElementById('tools-container');
-        container.innerHTML = '';
-
-        // Header badge
-        document.getElementById('header-badge-text').textContent =
-            tools.length === 0 ? '0 strumenti' :
-            tools.length === 1 ? '1 strumento' : `${tools.length} strumenti`;
-
-        // Alerts
-        const alerts = [];
-        tools.forEach(tool => {
-            for (const key in maintenanceRules) {
-                const rule = maintenanceRules[key];
-                const pct = ((tool.hours - tool.maintenanceHistory[key]) / rule.interval) * 100;
-                if (pct >= 100) {
-                    alerts.push(`${tool.brand} ${tool.model}: ${rule.name}`);
-                    break;
-                }
+// ─────────────────────────────────────────────
+// INIT & PERSIST
+// ─────────────────────────────────────────────
+window.onload = () => {
+    const saved = localStorage.getItem('gardentool_data_v2');
+    if (saved) {
+        tools = JSON.parse(saved);
+        // Migrate old data (no category field)
+        tools.forEach(t => {
+            if (!t.category) {
+                t.category = 'trimmer';
+                if (!t.maintenanceHistory) t.maintenanceHistory = {};
+                ['filter','spark','gear','carb'].forEach(k => {
+                    if (t.maintenanceHistory[k] === undefined) t.maintenanceHistory[k] = 0;
+                });
             }
         });
-
-        const banner = document.getElementById('alerts-banner');
-        const list = document.getElementById('alerts-list');
-        if (alerts.length > 0) {
-            banner.classList.add('show');
-            list.innerHTML = alerts.map(a => `<li>${a}</li>`).join('');
-        } else {
-            banner.classList.remove('show');
+    } else {
+        // Try migrating from old key
+        const old = localStorage.getItem('gardentool_data');
+        if (old) {
+            tools = JSON.parse(old).map(t => ({
+                ...t,
+                category: 'trimmer',
+                maintenanceHistory: t.maintenanceHistory || { filter: 0, spark: 0, gear: 0, carb: 0 }
+            }));
+            save();
         }
-
-        if (tools.length === 0) {
-            container.innerHTML = `
-                <div class="empty-state">
-                    <div class="empty-icon">🌿</div>
-                    <h3>Nessun strumento registrato</h3>
-                    <p>Aggiungi il tuo primo strumento per iniziare a tenere traccia delle ore e delle manutenzioni.</p>
-                    <button class="btn btn-primary" onclick="openAddModal()">+ Aggiungi strumento</button>
-                </div>`;
-            return;
-        }
-
-        tools.forEach(tool => {
-            let worstPct = 0;
-            for (const key in maintenanceRules) {
-                const rule = maintenanceRules[key];
-                const pct = ((tool.hours - tool.maintenanceHistory[key]) / rule.interval) * 100;
-                if (pct > worstPct) worstPct = pct;
-            }
-
-            let statusClass, statusText;
-            if (worstPct >= 100) {
-                statusClass = 'status-danger'; statusText = 'Manutenzione richiesta';
-            } else if (worstPct >= 80) {
-                statusClass = 'status-warning'; statusText = 'Intervento consigliato';
-            } else {
-                statusClass = 'status-ok'; statusText = 'Tutto regolare';
-            }
-
-            const card = document.createElement('div');
-            card.className = 'tool-card';
-            card.innerHTML = `
-                <div class="tool-card-top">
-                    <div class="tool-card-identity">
-                        <div class="tool-card-brand">${tool.brand}</div>
-                        <div class="tool-card-model">${tool.model}</div>
-                    </div>
-                    <div class="tool-card-actions">
-                        <button class="btn btn-ghost btn-sm btn-icon" title="Modifica" onclick="event.stopPropagation(); quickEdit(${tool.id})">✏️</button>
-                        <button class="btn btn-danger btn-sm btn-icon" title="Elimina" onclick="event.stopPropagation(); quickDelete(${tool.id})">🗑</button>
-                    </div>
-                </div>
-                <div class="tool-card-meta">
-                    <span class="tag tag-neutral">${tool.type}</span>
-                    <span class="tag tag-neutral">Miscela ${tool.mix}%</span>
-                </div>
-                <div class="tool-card-hours">
-                    <span class="hours-big">${fmtHours(tool.hours)}</span>
-                    <span class="hours-label">ore di utilizzo</span>
-                </div>
-                <div class="tool-card-status ${statusClass}">
-                    <span class="status-dot"></span>
-                    ${statusText}
-                </div>
-                <button class="btn btn-ghost" style="width:100%;" onclick="openDetail(${tool.id})">Apri Dashboard →</button>
-            `;
-            container.appendChild(card);
-        });
     }
+    renderDashboard();
+};
 
-    // ─────────────────────────────────────────────
-    // QUICK ACTIONS FROM CARD
-    // ─────────────────────────────────────────────
-    function quickEdit(id) {
-        currentToolId = id;
-        openEditModal();
+function save() {
+    localStorage.setItem('gardentool_data_v2', JSON.stringify(tools));
+}
+
+function fmtHours(h) {
+    return Number.isInteger(h) ? h : parseFloat(h.toFixed(1));
+}
+
+// ─────────────────────────────────────────────
+// TOAST
+// ─────────────────────────────────────────────
+function toast(msg, emoji = '✅') {
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.innerHTML = `<span>${emoji}</span> ${msg}`;
+    document.getElementById('toast-container').appendChild(el);
+    setTimeout(() => {
+        el.classList.add('out');
+        setTimeout(() => el.remove(), 300);
+    }, 2800);
+}
+
+// ─────────────────────────────────────────────
+// WORST PCT (for status)
+// ─────────────────────────────────────────────
+function getWorstPct(tool) {
+    const rules = getRules(tool);
+    let worst = 0;
+    for (const key in rules) {
+        const rule = rules[key];
+        const pct = ((tool.hours - (tool.maintenanceHistory[key] || 0)) / rule.interval) * 100;
+        if (pct > worst) worst = pct;
     }
+    return worst;
+}
 
-    function quickDelete(id) {
-        currentToolId = id;
-        openDeleteConfirm();
-    }
+// ─────────────────────────────────────────────
+// DASHBOARD RENDER
+// ─────────────────────────────────────────────
+function renderDashboard() {
+    const container = document.getElementById('tools-container');
+    container.innerHTML = '';
 
-    // ─────────────────────────────────────────────
-    // DETAIL VIEW
-    // ─────────────────────────────────────────────
-    function openDetail(id) {
-        currentToolId = id;
-        const tool = tools.find(t => t.id === id);
-        if (!tool) return;
+    document.getElementById('header-badge-text').textContent =
+        tools.length === 0 ? '0 strumenti' :
+        tools.length === 1 ? '1 strumento' : `${tools.length} strumenti`;
 
-        document.getElementById('dashboard-view').style.display = 'none';
-        document.getElementById('tool-detail-view').style.display = 'block';
-        window.scrollTo(0, 0);
-
-        refreshDetailHeader(tool);
-        renderMaintenance(tool);
-
-        document.getElementById('custom-hours-input').value = '';
-        document.getElementById('petrol-liters').value = '';
-        document.getElementById('oil-result').textContent = '—';
-    }
-
-    function refreshDetailHeader(tool) {
-        document.getElementById('detail-brand').textContent = tool.brand;
-        document.getElementById('detail-model').textContent = tool.model;
-        document.getElementById('detail-meta').textContent = `Motore ${tool.type} · Miscela ${tool.mix}%`;
-        document.getElementById('detail-hours').textContent = fmtHours(tool.hours);
-        document.getElementById('calc-mix-perc').textContent = tool.mix;
-    }
-
-    function closeDetail() {
-        currentToolId = null;
-        document.getElementById('tool-detail-view').style.display = 'none';
-        document.getElementById('dashboard-view').style.display = 'block';
-        renderDashboard();
-    }
-
-    function addHours() {
-        const input = document.getElementById('custom-hours-input');
-        const val = parseFloat(input.value);
-        if (isNaN(val) || val <= 0) { toast('Inserisci un numero valido di ore.', '⚠️'); return; }
-        const tool = tools.find(t => t.id === currentToolId);
-        if (!tool) return;
-        tool.hours = Math.round((tool.hours + val) * 10) / 10;
-        save();
-        document.getElementById('detail-hours').textContent = fmtHours(tool.hours);
-        renderMaintenance(tool);
-        input.value = '';
-        toast(`+${fmtHours(val)} ore aggiunte`);
-    }
-
-    // ─────────────────────────────────────────────
-    // MAINTENANCE
-    // ─────────────────────────────────────────────
-    function renderMaintenance(tool) {
-        const container = document.getElementById('maint-container');
-        container.innerHTML = '';
-
-        for (const key in maintenanceRules) {
-            const rule = maintenanceRules[key];
-            const since = tool.hours - tool.maintenanceHistory[key];
-            let pct = Math.min((since / rule.interval) * 100, 100);
-
-            let color, statusText, btnHtml;
+    // Alerts
+    const alerts = [];
+    tools.forEach(tool => {
+        const rules = getRules(tool);
+        for (const key in rules) {
+            const rule = rules[key];
+            const pct = ((tool.hours - (tool.maintenanceHistory[key] || 0)) / rule.interval) * 100;
             if (pct >= 100) {
-                color = 'var(--red)';
-                statusText = `<span class="maint-status-text" style="color:var(--red)">Da fare subito!</span>`;
-                btnHtml = `<button class="btn btn-danger btn-sm" onclick="maintDone('${key}')">✅ Fatto</button>`;
-            } else if (pct >= 80) {
-                color = 'var(--amber)';
-                statusText = `<span class="maint-status-text" style="color:#92400e">Consigliata a breve</span>`;
-                btnHtml = `<button class="btn btn-ghost btn-sm" onclick="maintDone('${key}')">✅ Fatto</button>`;
-            } else {
-                color = 'var(--green-500)';
-                statusText = `<span class="maint-status-text" style="color:var(--green-600)">Regolare</span>`;
-                btnHtml = `<button class="btn btn-ghost btn-sm" style="opacity:0.6" onclick="maintDone('${key}')">↺ Azzera</button>`;
+                alerts.push(`${tool.brand} ${tool.model}: ${rule.name}`);
+                break;
             }
-
-            const item = document.createElement('div');
-            item.className = 'maint-item';
-            item.innerHTML = `
-                <div class="maint-top">
-                    <span class="maint-name">${rule.name}</span>
-                    <span class="maint-count">${fmtHours(since)} / ${rule.interval}h</span>
-                </div>
-                <div class="prog-bg">
-                    <div class="prog-fill" style="width:${pct}%; background:${color};"></div>
-                </div>
-                <div class="maint-bottom">
-                    ${statusText}
-                    ${btnHtml}
-                </div>
-                <details class="maint-details">
-                    <summary>Istruzioni e dettagli…</summary>
-                    <p class="maint-info-text">${rule.info}</p>
-                </details>
-            `;
-            container.appendChild(item);
         }
+    });
+
+    const banner = document.getElementById('alerts-banner');
+    const list = document.getElementById('alerts-list');
+    if (alerts.length > 0) {
+        banner.classList.add('show');
+        list.innerHTML = alerts.map(a => `<li>${a}</li>`).join('');
+    } else {
+        banner.classList.remove('show');
     }
 
-    function maintDone(key) {
-        const tool = tools.find(t => t.id === currentToolId);
-        if (!tool) return;
-        tool.maintenanceHistory[key] = tool.hours;
-        save();
-        renderMaintenance(tool);
-        toast(`${maintenanceRules[key].name} registrata`);
+    if (tools.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon">🌿</div>
+                <h3>Nessun strumento registrato</h3>
+                <p>Aggiungi il tuo primo strumento per iniziare a tenere traccia delle ore e delle manutenzioni.</p>
+                <button class="btn btn-primary" onclick="openAddModal()">+ Aggiungi strumento</button>
+            </div>`;
+        return;
     }
 
-    // ─────────────────────────────────────────────
-    // MIX CALCULATOR
-    // ─────────────────────────────────────────────
-    function calcMix() {
-        const tool = tools.find(t => t.id === currentToolId);
-        if (!tool) return;
-        const liters = parseFloat(document.getElementById('petrol-liters').value);
-        if (liters > 0) {
-            document.getElementById('oil-result').textContent = Math.round(liters * tool.mix * 10);
+    tools.forEach(tool => {
+        const worstPct = getWorstPct(tool);
+        const isChainsaw = tool.category === 'chainsaw';
+
+        let statusClass, statusText;
+        if (worstPct >= 100) { statusClass = 'status-danger'; statusText = 'Manutenzione richiesta'; }
+        else if (worstPct >= 80) { statusClass = 'status-warning'; statusText = 'Intervento consigliato'; }
+        else { statusClass = 'status-ok'; statusText = 'Tutto regolare'; }
+
+        const mixTag = isChainsaw
+            ? `<span class="tag tag-chainsaw">Miscela ${tool.mix}%</span>`
+            : `<span class="tag tag-neutral">Miscela ${tool.mix}%</span>`;
+
+        const typeTag = isChainsaw
+            ? `<span class="tag tag-chainsaw">🪚 Motosega</span>`
+            : `<span class="tag tag-neutral">${tool.type}</span>`;
+
+        const barTag = isChainsaw && tool.bar
+            ? `<span class="tag tag-neutral">Barra ${tool.bar}cm</span>`
+            : '';
+
+        const card = document.createElement('div');
+        card.className = `tool-card${isChainsaw ? ' chainsaw-card' : ''}`;
+        card.innerHTML = `
+            <div class="tool-card-top">
+                <div class="tool-card-identity">
+                    <div class="tool-card-brand">${tool.brand}</div>
+                    <div class="tool-card-model">${tool.model}</div>
+                </div>
+                <div class="tool-card-actions">
+                    <button class="btn btn-ghost btn-sm btn-icon" title="Modifica" onclick="event.stopPropagation(); quickEdit(${tool.id})">✏️</button>
+                    <button class="btn btn-danger btn-sm btn-icon" title="Elimina" onclick="event.stopPropagation(); quickDelete(${tool.id})">🗑</button>
+                </div>
+            </div>
+            <div class="tool-card-meta">
+                ${typeTag}
+                ${mixTag}
+                ${barTag}
+            </div>
+            <div class="tool-card-hours">
+                <span class="hours-big">${fmtHours(tool.hours)}</span>
+                <span class="hours-label">ore di utilizzo</span>
+            </div>
+            <div class="tool-card-status ${statusClass}">
+                <span class="status-dot"></span>
+                ${statusText}
+            </div>
+            <button class="btn btn-ghost" style="width:100%;" onclick="openDetail(${tool.id})">Apri Dashboard →</button>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// ─────────────────────────────────────────────
+// QUICK ACTIONS
+// ─────────────────────────────────────────────
+function quickEdit(id) { currentToolId = id; openEditModal(); }
+function quickDelete(id) { currentToolId = id; openDeleteConfirm(); }
+
+// ─────────────────────────────────────────────
+// DETAIL VIEW
+// ─────────────────────────────────────────────
+function openDetail(id) {
+    currentToolId = id;
+    const tool = tools.find(t => t.id === id);
+    if (!tool) return;
+
+    document.getElementById('dashboard-view').style.display = 'none';
+    document.getElementById('tool-detail-view').style.display = 'block';
+    window.scrollTo(0, 0);
+
+    refreshDetailHeader(tool);
+    renderDetailPanels(tool);
+
+    document.getElementById('custom-hours-input').value = '';
+}
+
+function refreshDetailHeader(tool) {
+    const hero = document.getElementById('detail-hero');
+    const isChainsaw = tool.category === 'chainsaw';
+
+    hero.className = `detail-hero${isChainsaw ? ' chainsaw-hero' : ''}`;
+    hero.setAttribute('data-emoji', isChainsaw ? '🪚' : '🌿');
+
+    document.getElementById('detail-brand').textContent = tool.brand;
+    document.getElementById('detail-model').textContent = tool.model;
+
+    const metaParts = isChainsaw
+        ? [`Motosega 2 tempi`, `Miscela ${tool.mix}%`, tool.bar ? `Barra ${tool.bar}cm` : null].filter(Boolean)
+        : [`Motore ${tool.type}`, `Miscela ${tool.mix}%`];
+
+    document.getElementById('detail-meta').textContent = metaParts.join(' · ');
+    document.getElementById('detail-hours').textContent = fmtHours(tool.hours);
+}
+
+function closeDetail() {
+    currentToolId = null;
+    document.getElementById('tool-detail-view').style.display = 'none';
+    document.getElementById('dashboard-view').style.display = 'block';
+    renderDashboard();
+}
+
+function addHours() {
+    const input = document.getElementById('custom-hours-input');
+    const val = parseFloat(input.value);
+    if (isNaN(val) || val <= 0) { toast('Inserisci un numero valido di ore.', '⚠️'); return; }
+    const tool = tools.find(t => t.id === currentToolId);
+    if (!tool) return;
+    tool.hours = Math.round((tool.hours + val) * 10) / 10;
+    save();
+    document.getElementById('detail-hours').textContent = fmtHours(tool.hours);
+    renderDetailPanels(tool);
+    input.value = '';
+    toast(`+${fmtHours(val)} ore aggiunte`);
+}
+
+// ─────────────────────────────────────────────
+// RENDER DETAIL PANELS — adapts to category
+// ─────────────────────────────────────────────
+function renderDetailPanels(tool) {
+    const container = document.getElementById('detail-panels-container');
+    container.innerHTML = '';
+
+    if (tool.category === 'chainsaw') {
+        renderChainsawPanels(tool, container);
+    } else {
+        renderTrimmerPanels(tool, container);
+    }
+}
+
+function renderTrimmerPanels(tool, container) {
+    const grid = document.createElement('div');
+    grid.className = 'detail-grid';
+
+    // Maintenance panel
+    const maintPanel = document.createElement('div');
+    maintPanel.className = 'panel';
+    maintPanel.innerHTML = `<div class="panel-title">🛠 Stato Manutenzione</div><div id="maint-container"></div>`;
+    grid.appendChild(maintPanel);
+
+    // Mix calc panel
+    const calcPanel = document.createElement('div');
+    calcPanel.className = 'panel';
+    calcPanel.innerHTML = `
+        <div class="panel-title">⛽ Calcolatore Miscela</div>
+        <p class="calc-hint">Inserisci i litri di benzina per calcolare l'olio necessario alla percentuale di miscela configurata (<strong>${tool.mix}%</strong>).</p>
+        <label class="calc-label">Litri di benzina</label>
+        <input type="number" class="calc-input" id="petrol-liters" placeholder="Es. 5" step="0.5" min="0.5" oninput="calcMix()">
+        <div class="calc-result-card">
+            <div class="calc-result-label">Olio da aggiungere</div>
+            <div class="calc-result-value" id="oil-result">—</div>
+            <div class="calc-result-unit">ml</div>
+        </div>
+    `;
+    grid.appendChild(calcPanel);
+
+    container.appendChild(grid);
+    renderMaintenance(tool);
+}
+
+function renderChainsawPanels(tool, container) {
+    // Row 1: Maintenance (full width) + Mix calc
+    const grid1 = document.createElement('div');
+    grid1.className = 'detail-grid-3';
+
+    // Maintenance panel (spans 2)
+    const maintPanel = document.createElement('div');
+    maintPanel.className = 'panel panel-span-2';
+    maintPanel.innerHTML = `<div class="panel-title">🛠 Stato Manutenzione Motosega</div><div id="maint-container"></div>`;
+    grid1.appendChild(maintPanel);
+
+    // Mix calc panel
+    const calcPanel = document.createElement('div');
+    calcPanel.className = 'panel';
+    calcPanel.innerHTML = `
+        <div class="panel-title">⛽ Calcolatore Miscela</div>
+        <p class="calc-hint">Inserisci i litri di benzina per calcolare l'olio motore (miscela ${tool.mix}%).</p>
+        <label class="calc-label">Litri di benzina</label>
+        <input type="number" class="calc-input" id="petrol-liters" placeholder="Es. 1" step="0.25" min="0.25" oninput="calcMix()">
+        <div class="calc-result-card">
+            <div class="calc-result-label">Olio motore da aggiungere</div>
+            <div class="calc-result-value" id="oil-result">—</div>
+            <div class="calc-result-unit">ml</div>
+        </div>
+    `;
+    grid1.appendChild(calcPanel);
+
+    container.appendChild(grid1);
+
+    // Row 2: Bar oil tracker + notes
+    const grid2 = document.createElement('div');
+    grid2.className = 'detail-grid';
+    grid2.style.marginTop = '1.25rem';
+
+    // Bar oil panel
+    const barOilPanel = document.createElement('div');
+    barOilPanel.className = 'panel panel-chainsaw-oil';
+    barOilPanel.innerHTML = buildBarOilPanel(tool);
+    grid2.appendChild(barOilPanel);
+
+    // Chain info panel
+    const chainInfoPanel = document.createElement('div');
+    chainInfoPanel.className = 'panel';
+    chainInfoPanel.innerHTML = `
+        <div class="panel-title">ℹ️ Info Catena e Barra</div>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+            <div style="background:var(--surface-1);border-radius:var(--radius-sm);padding:0.85rem;border:1px solid var(--surface-3);">
+                <div style="font-size:0.78rem;font-weight:600;color:var(--text-muted);margin-bottom:2px;text-transform:uppercase;letter-spacing:.05em;">Barra guida</div>
+                <div style="font-size:1.3rem;font-weight:700;color:var(--text-primary);font-family:'DM Mono',monospace;">${tool.bar ? tool.bar + ' cm' : '—'}</div>
+            </div>
+            <div style="background:var(--surface-1);border-radius:var(--radius-sm);padding:0.85rem;border:1px solid var(--surface-3);">
+                <div style="font-size:0.78rem;font-weight:600;color:var(--text-muted);margin-bottom:2px;text-transform:uppercase;letter-spacing:.05em;">Olio barra preferito</div>
+                <div style="font-size:0.95rem;font-weight:600;color:var(--text-primary);">${tool.baroil || 'Non specificato'}</div>
+            </div>
+            <div style="background:#fff7ed;border-radius:var(--radius-sm);padding:0.85rem;border:1px solid #fed7aa;">
+                <div style="font-size:0.78rem;font-weight:700;color:#9a3412;margin-bottom:4px;">⚠️ Sicurezza Kickback</div>
+                <p style="font-size:0.78rem;color:#c2410c;line-height:1.5;">Mantieni sempre l'impugnatura anteriore saldamente. Non tagliare mai con la punta della barra. Controlla il freno catena prima di ogni utilizzo.</p>
+            </div>
+        </div>
+    `;
+    grid2.appendChild(chainInfoPanel);
+
+    container.appendChild(grid2);
+
+    renderMaintenance(tool);
+    initBarOilListeners(tool);
+}
+
+function buildBarOilPanel(tool) {
+    const pct = Math.min(Math.round(((tool.barOilHours || 0) / 8) * 100), 100);
+    const urgency = pct >= 100 ? 'Rifornire ora!' : pct >= 75 ? 'Quasi esaurito' : 'Livello ok';
+    return `
+        <div class="panel-title">🛢 Olio Lubrificante Barra</div>
+        <div class="oil-tracker">
+            <div>
+                <div class="oil-tracker-label">Stima consumo olio barra</div>
+                <div class="oil-tracker-sub">Basata sulle ore dalla ricarica</div>
+            </div>
+            <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:0.78rem;color:#9a3412;font-weight:600;">${urgency}</span>
+                    <span style="font-size:0.78rem;font-family:'DM Mono',monospace;color:#c2410c;">${fmtHours(tool.barOilHours || 0)}h dall'ultima ricarica</span>
+                </div>
+                <div class="oil-level-bar">
+                    <div class="oil-level-fill" style="width:${pct}%;">
+                        <span class="oil-level-text">${pct}%</span>
+                    </div>
+                </div>
+            </div>
+            <div style="background:#fff7ed;border-radius:var(--radius-sm);padding:0.75rem;border:1px solid #fed7aa;">
+                <p style="font-size:0.78rem;color:#c2410c;line-height:1.5;">⚡ Il serbatoio dell'olio barra si esaurisce circa ogni 1 pieno di carburante. Controlla visivamente il livello prima di ogni utilizzo.</p>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;">
+                <input type="number" id="bar-oil-hours-input" step="0.5" min="0.5" placeholder="Ore di utilizzo" style="flex:1;padding:0.55rem 0.75rem;border:1.5px solid #fed7aa;border-radius:var(--radius-sm);font-family:'DM Mono',monospace;font-size:0.9rem;color:#9a3412;background:#fff7ed;">
+                <button class="oil-refill-btn" onclick="recordBarOilHours()">+ Aggiungi ore</button>
+            </div>
+            <button class="oil-refill-btn" style="width:100%;text-align:center;" onclick="resetBarOil()">🛢 Ho ricaricato l'olio barra</button>
+        </div>
+    `;
+}
+
+function initBarOilListeners(tool) { /* handlers defined globally */ }
+
+function recordBarOilHours() {
+    // This is handled by addHours which updates tool.hours; 
+    // bar oil hours tracked via a separate field
+    const inp = document.getElementById('bar-oil-hours-input');
+    if (!inp) return;
+    const val = parseFloat(inp.value);
+    if (isNaN(val) || val <= 0) { toast('Inserisci ore valide.', '⚠️'); return; }
+    const tool = tools.find(t => t.id === currentToolId);
+    if (!tool) return;
+    tool.barOilHours = Math.round(((tool.barOilHours || 0) + val) * 10) / 10;
+    save();
+    // Re-render panels
+    renderDetailPanels(tool);
+    toast(`Olio barra: +${fmtHours(val)}h registrate`, '🛢');
+}
+
+function resetBarOil() {
+    const tool = tools.find(t => t.id === currentToolId);
+    if (!tool) return;
+    tool.barOilHours = 0;
+    save();
+    renderDetailPanels(tool);
+    toast('Olio barra ricaricato ✓', '🛢');
+}
+
+// ─────────────────────────────────────────────
+// MAINTENANCE RENDER
+// ─────────────────────────────────────────────
+function renderMaintenance(tool) {
+    const container = document.getElementById('maint-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const rules = getRules(tool);
+    const isChainsaw = tool.category === 'chainsaw';
+
+    for (const key in rules) {
+        const rule = rules[key];
+        const since = tool.hours - (tool.maintenanceHistory[key] || 0);
+        let pct = Math.min((since / rule.interval) * 100, 100);
+
+        let color, statusText, btnHtml, itemClass;
+        if (pct >= 100) {
+            color = 'var(--red)';
+            statusText = `<span class="maint-status-text" style="color:var(--red)">Da fare subito!</span>`;
+            btnHtml = `<button class="btn btn-danger btn-sm" onclick="maintDone('${key}')">✅ Fatto</button>`;
+            itemClass = 'danger-item';
+        } else if (pct >= 80) {
+            color = 'var(--amber)';
+            statusText = `<span class="maint-status-text" style="color:#92400e">Consigliata a breve</span>`;
+            btnHtml = `<button class="btn btn-ghost btn-sm" onclick="maintDone('${key}')">✅ Fatto</button>`;
+            itemClass = 'warning-item';
         } else {
-            document.getElementById('oil-result').textContent = '—';
-        }
-    }
-
-    // ─────────────────────────────────────────────
-    // ADD MODAL
-    // ─────────────────────────────────────────────
-    function openAddModal() {
-        document.getElementById('f-brand').value = '';
-        document.getElementById('f-model').value = '';
-        document.getElementById('f-type').value = '2 tempi';
-        document.getElementById('f-mix').value = '';
-        openModal('add-modal');
-    }
-
-    function closeAddModal() { closeModal('add-modal'); }
-
-    function saveTool() {
-        const brand = document.getElementById('f-brand').value.trim();
-        const model = document.getElementById('f-model').value.trim();
-        const mix = parseFloat(document.getElementById('f-mix').value);
-
-        if (!brand || !model || isNaN(mix)) {
-            toast('Compila tutti i campi correttamente.', '⚠️'); return;
+            color = isChainsaw ? '#f97316' : 'var(--green-500)';
+            statusText = `<span class="maint-status-text" style="color:${isChainsaw ? '#c2410c' : 'var(--green-600)'}">Regolare</span>`;
+            btnHtml = `<button class="btn btn-ghost btn-sm" style="opacity:0.6" onclick="maintDone('${key}')">↺ Azzera</button>`;
+            itemClass = '';
         }
 
-        tools.push({
-            id: Date.now(),
-            brand, model,
-            type: document.getElementById('f-type').value,
-            mix,
-            hours: 0,
-            maintenanceHistory: { filter: 0, spark: 0, gear: 0, carb: 0 }
-        });
-        save();
-        renderDashboard();
-        closeAddModal();
-        toast(`${brand} ${model} aggiunto`);
+        const safetyHtml = rule.safetyAlert
+            ? `<div class="safety-alert"><span class="safety-alert-icon">⚠️</span><span>${rule.safetyAlert}</span></div>`
+            : '';
+
+        const summaryClass = isChainsaw ? 'class="chainsaw-summary"' : '';
+
+        const item = document.createElement('div');
+        item.className = `maint-item${itemClass ? ' ' + itemClass : ''}`;
+        item.innerHTML = `
+            <div class="maint-top">
+                <span class="maint-name">${rule.name}</span>
+                <span class="maint-count">${fmtHours(since)} / ${rule.interval}h</span>
+            </div>
+            <div class="prog-bg">
+                <div class="prog-fill" style="width:${pct}%; background:${color};"></div>
+            </div>
+            <div class="maint-bottom">
+                ${statusText}
+                ${btnHtml}
+            </div>
+            ${safetyHtml}
+            <details class="maint-details">
+                <summary ${summaryClass}>Istruzioni e dettagli…</summary>
+                <p class="maint-info-text">${rule.info}</p>
+            </details>
+        `;
+        container.appendChild(item);
+    }
+}
+
+function maintDone(key) {
+    const tool = tools.find(t => t.id === currentToolId);
+    if (!tool) return;
+    tool.maintenanceHistory[key] = tool.hours;
+    save();
+    renderMaintenance(tool);
+    const rules = getRules(tool);
+    toast(`${rules[key].name} registrata`);
+}
+
+// ─────────────────────────────────────────────
+// MIX CALCULATOR
+// ─────────────────────────────────────────────
+function calcMix() {
+    const tool = tools.find(t => t.id === currentToolId);
+    if (!tool) return;
+    const liters = parseFloat(document.getElementById('petrol-liters').value);
+    const oilEl = document.getElementById('oil-result');
+    if (oilEl) {
+        oilEl.textContent = liters > 0 ? Math.round(liters * tool.mix * 10) : '—';
+    }
+}
+
+// ─────────────────────────────────────────────
+// CATEGORY CHANGE (add modal)
+// ─────────────────────────────────────────────
+function onCategoryChange(prefix) {
+    const cat = document.getElementById(`${prefix}-category`).value;
+    const chainsawEls = document.querySelectorAll(`#add-modal .chainsaw-only`);
+    const trimmerEls = document.querySelectorAll(`#add-modal .trimotor-only`);
+
+    chainsawEls.forEach(el => {
+        el.style.display = cat === 'chainsaw' ? 'block' : 'none';
+    });
+    trimmerEls.forEach(el => {
+        el.style.display = cat === 'trimmer' ? 'block' : 'none';
+    });
+
+    // For chainsaw, default mix to 2.5%
+    if (cat === 'chainsaw' && !document.getElementById(`${prefix}-mix`).value) {
+        document.getElementById(`${prefix}-mix`).value = '2.5';
+    }
+}
+
+// ─────────────────────────────────────────────
+// ADD MODAL
+// ─────────────────────────────────────────────
+function openAddModal() {
+    document.getElementById('f-brand').value = '';
+    document.getElementById('f-model').value = '';
+    document.getElementById('f-type').value = '2 tempi';
+    document.getElementById('f-mix').value = '';
+    document.getElementById('f-category').value = 'trimmer';
+    document.getElementById('f-bar').value = '';
+    document.getElementById('f-baroil').value = '';
+    // Reset visibility
+    document.querySelectorAll('#add-modal .chainsaw-only').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('#add-modal .trimotor-only').forEach(el => el.style.display = 'block');
+    openModal('add-modal');
+}
+
+function closeAddModal() { closeModal('add-modal'); }
+
+function saveTool() {
+    const brand = document.getElementById('f-brand').value.trim();
+    const model = document.getElementById('f-model').value.trim();
+    const mix = parseFloat(document.getElementById('f-mix').value);
+    const category = document.getElementById('f-category').value;
+
+    if (!brand || !model || isNaN(mix)) {
+        toast('Compila tutti i campi correttamente.', '⚠️'); return;
     }
 
-    // ─────────────────────────────────────────────
-    // EDIT MODAL
-    // ─────────────────────────────────────────────
-    function openEditModal() {
-        const tool = tools.find(t => t.id === currentToolId);
-        if (!tool) return;
-        document.getElementById('ef-brand').value = tool.brand;
-        document.getElementById('ef-model').value = tool.model;
-        document.getElementById('ef-type').value = tool.type;
-        document.getElementById('ef-mix').value = tool.mix;
-        openModal('edit-modal');
+    const newTool = {
+        id: Date.now(),
+        brand, model,
+        category,
+        mix,
+        hours: 0,
+        maintenanceHistory: {}
+    };
+
+    if (category === 'trimmer') {
+        newTool.type = document.getElementById('f-type').value;
+        newTool.maintenanceHistory = { filter: 0, spark: 0, gear: 0, carb: 0 };
+    } else {
+        newTool.type = '2 tempi';
+        newTool.bar = document.getElementById('f-bar').value || '';
+        newTool.baroil = document.getElementById('f-baroil').value.trim();
+        newTool.barOilHours = 0;
+        newTool.maintenanceHistory = { chain: 0, bar: 0, brake: 0, engine: 0 };
     }
 
-    function closeEditModal() { closeModal('edit-modal'); }
+    tools.push(newTool);
+    save();
+    renderDashboard();
+    closeAddModal();
+    toast(`${brand} ${model} aggiunto`);
+}
 
-    function updateTool() {
-        const brand = document.getElementById('ef-brand').value.trim();
-        const model = document.getElementById('ef-model').value.trim();
-        const mix = parseFloat(document.getElementById('ef-mix').value);
+// ─────────────────────────────────────────────
+// EDIT MODAL
+// ─────────────────────────────────────────────
+function openEditModal() {
+    const tool = tools.find(t => t.id === currentToolId);
+    if (!tool) return;
+    document.getElementById('ef-brand').value = tool.brand;
+    document.getElementById('ef-model').value = tool.model;
+    document.getElementById('ef-type').value = tool.type || '2 tempi';
+    document.getElementById('ef-mix').value = tool.mix;
 
-        if (!brand || !model || isNaN(mix)) {
-            toast('Compila tutti i campi correttamente.', '⚠️'); return;
-        }
+    const isChainsaw = tool.category === 'chainsaw';
+    const typeField = document.getElementById('ef-type-field');
+    const chainsawExtra = document.getElementById('ef-chainsaw-extra');
 
-        const tool = tools.find(t => t.id === currentToolId);
-        if (!tool) return;
-        tool.brand = brand;
-        tool.model = model;
+    typeField.style.display = isChainsaw ? 'none' : 'block';
+    chainsawExtra.style.display = isChainsaw ? 'block' : 'none';
+
+    if (isChainsaw) {
+        document.getElementById('ef-bar').value = tool.bar || '';
+        document.getElementById('ef-baroil').value = tool.baroil || '';
+    }
+
+    openModal('edit-modal');
+}
+
+function closeEditModal() { closeModal('edit-modal'); }
+
+function updateTool() {
+    const brand = document.getElementById('ef-brand').value.trim();
+    const model = document.getElementById('ef-model').value.trim();
+    const mix = parseFloat(document.getElementById('ef-mix').value);
+
+    if (!brand || !model || isNaN(mix)) {
+        toast('Compila tutti i campi correttamente.', '⚠️'); return;
+    }
+
+    const tool = tools.find(t => t.id === currentToolId);
+    if (!tool) return;
+    tool.brand = brand;
+    tool.model = model;
+    tool.mix = mix;
+
+    if (tool.category === 'trimmer') {
         tool.type = document.getElementById('ef-type').value;
-        tool.mix = mix;
-        save();
-        closeEditModal();
-
-        // Refresh wherever we are
-        if (document.getElementById('tool-detail-view').style.display !== 'none') {
-            refreshDetailHeader(tool);
-        } else {
-            renderDashboard();
-        }
-        toast(`${brand} ${model} aggiornato`);
+    } else {
+        tool.bar = document.getElementById('ef-bar').value || '';
+        tool.baroil = document.getElementById('ef-baroil').value.trim();
     }
 
-    // ─────────────────────────────────────────────
-    // DELETE
-    // ─────────────────────────────────────────────
-    function openDeleteConfirm() { openModal('delete-modal'); }
-    function closeDeleteConfirm() { closeModal('delete-modal'); }
+    save();
+    closeEditModal();
 
-    function confirmDelete() {
-        const tool = tools.find(t => t.id === currentToolId);
-        const name = tool ? `${tool.brand} ${tool.model}` : 'strumento';
-        tools = tools.filter(t => t.id !== currentToolId);
-        save();
-        closeDeleteConfirm();
-
-        // If we were in detail, go back to dashboard
-        if (document.getElementById('tool-detail-view').style.display !== 'none') {
-            closeDetail();
-        } else {
-            renderDashboard();
-        }
-        currentToolId = null;
-        toast(`${name} eliminato`, '🗑');
-    }
-
-    // ─────────────────────────────────────────────
-    // EXPORT / IMPORT
-    // ─────────────────────────────────────────────
-    function exportData() {
-        if (tools.length === 0) { toast('Nessun dato da salvare.', '⚠️'); return; }
-        const url = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tools));
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `gardentool_backup_${new Date().toISOString().slice(0,10)}.json`;
-        a.click();
-        toast('Backup scaricato');
-    }
-
-    function importData(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = e => {
-            try {
-                const parsed = JSON.parse(e.target.result);
-                if (Array.isArray(parsed)) {
-                    pendingImportData = parsed;
-                    openModal('import-modal');
-                } else {
-                    toast('File non valido per questa app.', '❌');
-                }
-            } catch {
-                toast('Errore nella lettura del file.', '❌');
-            }
-        };
-        reader.readAsText(file);
-        event.target.value = '';
-    }
-
-    function cancelImport() {
-        pendingImportData = null;
-        closeModal('import-modal');
-    }
-
-    function confirmImport() {
-        if (!pendingImportData) return;
-        tools = pendingImportData;
-        pendingImportData = null;
-        save();
+    if (document.getElementById('tool-detail-view').style.display !== 'none') {
+        refreshDetailHeader(tool);
+        renderDetailPanels(tool);
+    } else {
         renderDashboard();
-        closeModal('import-modal');
-        toast(`${tools.length} strumenti ripristinati`);
     }
+    toast(`${brand} ${model} aggiornato`);
+}
 
-    // ─────────────────────────────────────────────
-    // MODAL HELPERS
-    // ─────────────────────────────────────────────
-    function openModal(id) {
-        document.getElementById(id).classList.add('open');
-        document.body.style.overflow = 'hidden';
+// ─────────────────────────────────────────────
+// DELETE
+// ─────────────────────────────────────────────
+function openDeleteConfirm() { openModal('delete-modal'); }
+function closeDeleteConfirm() { closeModal('delete-modal'); }
+
+function confirmDelete() {
+    const tool = tools.find(t => t.id === currentToolId);
+    const name = tool ? `${tool.brand} ${tool.model}` : 'strumento';
+    tools = tools.filter(t => t.id !== currentToolId);
+    save();
+    closeDeleteConfirm();
+
+    if (document.getElementById('tool-detail-view').style.display !== 'none') {
+        closeDetail();
+    } else {
+        renderDashboard();
     }
+    currentToolId = null;
+    toast(`${name} eliminato`, '🗑');
+}
 
-    function closeModal(id) {
-        document.getElementById(id).classList.remove('open');
-        document.body.style.overflow = '';
-    }
+// ─────────────────────────────────────────────
+// EXPORT / IMPORT
+// ─────────────────────────────────────────────
+function exportData() {
+    if (tools.length === 0) { toast('Nessun dato da salvare.', '⚠️'); return; }
+    const url = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tools));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `gardentool_backup_${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    toast('Backup scaricato');
+}
 
-    // Close modals on overlay click
-    document.querySelectorAll('.modal-overlay').forEach(overlay => {
-        overlay.addEventListener('click', e => {
-            if (e.target === overlay) {
-                overlay.classList.remove('open');
-                document.body.style.overflow = '';
+function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        try {
+            const parsed = JSON.parse(e.target.result);
+            if (Array.isArray(parsed)) {
+                pendingImportData = parsed;
+                openModal('import-modal');
+            } else {
+                toast('File non valido per questa app.', '❌');
             }
-        });
-    });
+        } catch {
+            toast('Errore nella lettura del file.', '❌');
+        }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+}
 
-    // ESC key
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-            document.querySelectorAll('.modal-overlay.open').forEach(m => {
-                m.classList.remove('open');
-                document.body.style.overflow = '';
-            });
+function cancelImport() { pendingImportData = null; closeModal('import-modal'); }
+
+function confirmImport() {
+    if (!pendingImportData) return;
+    tools = pendingImportData;
+    pendingImportData = null;
+    save();
+    renderDashboard();
+    closeModal('import-modal');
+    toast(`${tools.length} strumenti ripristinati`);
+}
+
+// ─────────────────────────────────────────────
+// MODAL HELPERS
+// ─────────────────────────────────────────────
+function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+        if (e.target === overlay) {
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
         }
     });
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.open').forEach(m => {
+            m.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    }
+});
 </script>
 </body>
 </html>
